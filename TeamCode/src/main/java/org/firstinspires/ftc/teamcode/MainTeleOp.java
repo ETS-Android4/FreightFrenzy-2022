@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 @TeleOp(name="Starving child")
 public class MainTeleOp extends CommandOpMode {
     //motors
-    private Motor arm, intakeMotor;
+    private Motor arm, intakeLeft, intakeRight;
 
     //subsystems
     private IntakeSubsystem intakeSubsystem;
@@ -41,10 +41,11 @@ public class MainTeleOp extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.intakeMotor = new Motor(hardwareMap, "intake");
+        this.intakeLeft = new Motor(hardwareMap, "intakeL");
+        this.intakeRight = new Motor(hardwareMap, "intakeR");
         this.arm = new Motor(hardwareMap, "lift");
 
-        this.intakeSubsystem = new IntakeSubsystem(intakeMotor);
+        this.intakeSubsystem = new IntakeSubsystem(intakeLeft, intakeRight);
         this.liftSubsystem = new LiftSubsystem(arm);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
 
