@@ -21,10 +21,12 @@ public class LiftCommand extends CommandBase {
     public void initialize() {
         time.reset();
         if (level == 0) {
+            level++;
+        } else if (level == 1) {
             liftSubsystem.motorUp();
             timeToLift = 0.4;
             level++;
-        } else if (level == 1) {
+        } else if (level == 2) {
             liftSubsystem.motorUp();
             timeToLift = 0.7;
             level++;
