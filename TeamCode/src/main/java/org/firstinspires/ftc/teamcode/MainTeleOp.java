@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
 @TeleOp(name="Starving child")
 public class MainTeleOp extends CommandOpMode {
     //motors
-    private Motor arm, wrist, intakeLeft, intakeRight;
+    private Motor arm, wrist, intake;
 
     //subsystems
     private IntakeSubsystem intakeSubsystem;
@@ -49,12 +49,11 @@ public class MainTeleOp extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.intakeLeft = new Motor(hardwareMap, "intakeL");
-        this.intakeRight = new Motor(hardwareMap, "intakeR");
+        this.intake = new Motor(hardwareMap, "intake");
         this.arm = new Motor(hardwareMap, "lift");
         this.wrist = new Motor(hardwareMap, "wrist");
 
-        this.intakeSubsystem = new IntakeSubsystem(intakeLeft, intakeRight);
+        this.intakeSubsystem = new IntakeSubsystem(intake);
         this.liftSubsystem = new LiftSubsystem(arm);
         this.wristSubsystem = new WristSubsystem(wrist);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);

@@ -4,29 +4,23 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 
 public class IntakeSubsystem extends SubsystemBase {
-    private final Motor intakeLeft;
-    private final Motor intakeRight;
+    private final Motor intakeMotor;
 
-    public IntakeSubsystem(Motor intakeL, Motor intakeR){
-        this.intakeLeft = intakeL;
-        this.intakeRight = intakeR;
+    public IntakeSubsystem(Motor intakeL){
+        this.intakeMotor = intakeL;
 
-        this.intakeLeft.setInverted(false);
-        this.intakeRight.setInverted(true);
+        this.intakeMotor.setInverted(false);
     }
 
     public void in() {
-        intakeLeft.set(1.0);
-        intakeRight.set(1.0);
+        intakeMotor.set(1.0);
     }
 
     public void out() {
-        intakeLeft.set(-1.0);
-        intakeRight.set(-1.0);
+        intakeMotor.set(-1.0);
     }
 
     public void stop() {
-        intakeLeft.stopMotor();
-        intakeRight.stopMotor();
+        intakeMotor.stopMotor();
     }
 }
