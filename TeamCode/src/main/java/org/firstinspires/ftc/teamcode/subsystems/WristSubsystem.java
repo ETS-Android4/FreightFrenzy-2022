@@ -13,11 +13,11 @@ public class WristSubsystem extends CommandBase {
     }
 
     public void raise() {
-        armMotor.set(1.0);
+        armMotor.set(0.4);
     }
 
     public void reduce() {
-        armMotor.set(-1.0);
+        armMotor.set(-0.4);
     }
 
     public void stop() {

@@ -5,12 +5,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
 
-public class WristCommand extends CommandBase {
+public class ArmExtendCommand extends CommandBase {
     private final WristSubsystem armSubsystem;
+    private double timeToMove;
     private ElapsedTime time;
     private int level;
 
-    public WristCommand(WristSubsystem armSubsystem, ElapsedTime timer) {
+    public ArmExtendCommand(WristSubsystem armSubsystem, ElapsedTime timer) {
         this.armSubsystem = armSubsystem;
         this.time = timer;
         level = 0;
@@ -18,33 +19,29 @@ public class WristCommand extends CommandBase {
 
     @Override
     public void execute() {
+        time.reset();
         if (level == 0) {
-            while(time.seconds() < 5) {
-                armSubsystem.raise();
-            }
+            armSubsystem.raise();
+            timeToMove = 5;
             level++;
         } else if (level == 1) {
-            while(time.seconds() < 5) {
-                armSubsystem.raise();
-            }
+            armSubsystem.raise();
+            timeToMove = 5;
             level++;
         } else if (level == 2) {
-            while(time.seconds() < 5) {
-                armSubsystem.raise();
-            }
+            armSubsystem.raise();
+            timeToMove = 5;
             level++;
         } else if (level == 3) {
-            while(time.seconds() < 7) {
-                armSubsystem.reduce();
-            }
+            armSubsystem.reduce();
+            timeToMove = 7;
             level = 0;
         }
-        time.reset();
     }
 
     @Override
     public boolean isFinished(){
-        return true;
+        return time.seconds() >= timeToMove;
     }
 
     @Override

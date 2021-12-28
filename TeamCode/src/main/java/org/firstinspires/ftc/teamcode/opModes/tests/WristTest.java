@@ -7,7 +7,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.commands.arm.WristCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.ArmExtendCommand;
 import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
 
 @TeleOp
@@ -21,7 +21,7 @@ public class WristTest extends CommandOpMode {
     private WristSubsystem armSubsystem;
 
     //commands
-    private WristCommand raiseCommand;
+    private ArmExtendCommand extendCommand;
 
     //gamepads
     private GamepadEx driver;
@@ -34,10 +34,10 @@ public class WristTest extends CommandOpMode {
 
         this.armSubsystem = new WristSubsystem(armMotor);
 
-        this.raiseCommand = new WristCommand(armSubsystem, time);
+        this.extendCommand = new ArmExtendCommand(armSubsystem, time);
 
         this.driver = new GamepadEx(gamepad1);
 
-        driver.getGamepadButton(GamepadKeys.Button.X).whenPressed(raiseCommand);
+        driver.getGamepadButton(GamepadKeys.Button.X).whenPressed(extendCommand);
     }
 }
