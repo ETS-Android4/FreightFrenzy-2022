@@ -12,8 +12,12 @@ public class IntakeCommand extends CommandBase {
     }
 
     @Override
-    public void execute() { intakeSubsystem.in(); }
+    public void execute() {
+        intakeSubsystem.in();
+    }
 
     @Override
-    public void end(boolean interrupted) { intakeSubsystem.stop(); }
+    public void end(boolean interrupted) {
+        intakeSubsystem.stop();
+    }
 }
