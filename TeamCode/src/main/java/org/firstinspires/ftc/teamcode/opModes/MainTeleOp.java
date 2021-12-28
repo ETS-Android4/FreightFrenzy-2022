@@ -54,7 +54,6 @@ public class  MainTeleOp extends CommandOpMode {
         this.intakeSubsystem = new IntakeSubsystem(this.intakeL, this.intakeR);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.floorSubsystem = new FloorSubsystem(this.floor);
-        //this.armSubsystem = new ArmSubsystem(this.armServo);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
@@ -63,8 +62,6 @@ public class  MainTeleOp extends CommandOpMode {
         this.mecanumDriveCommand = new MecanumDriveCommand(this.mecanumDriveSubsystem, () -> driver.getLeftY(),
                 driver::getLeftX, driver::getRightX
         );
-        //this.dumpArmCommand = new DumpArmCommand(this.armSubsystem);
-        //this.resetArmCommand = new ResetArmCommand(this.armSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
