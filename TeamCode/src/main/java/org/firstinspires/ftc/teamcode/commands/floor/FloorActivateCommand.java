@@ -16,11 +16,10 @@ public class FloorActivateCommand extends CommandBase {
     public void execute(){
         if(isActivated){
             subsystem.activate();
-            isActivated = false;
         } else {
             subsystem.reset();
-            isActivated = true;
         }
+        isActivated = !isActivated;
     }
 
     @Override
