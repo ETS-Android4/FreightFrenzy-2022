@@ -22,19 +22,19 @@ public class ArmExtendCommand extends CommandBase {
         time.reset();
         if (level == 0) {
             armSubsystem.raise();
-            timeToMove = 5;
+            timeToMove = 0.5;
             level++;
         } else if (level == 1) {
             armSubsystem.raise();
-            timeToMove = 5;
+            timeToMove = 0.5;
             level++;
         } else if (level == 2) {
             armSubsystem.raise();
-            timeToMove = 5;
+            timeToMove = 0.5;
             level++;
         } else if (level == 3) {
             armSubsystem.reduce();
-            timeToMove = 7;
+            timeToMove = 1.5;
             level = 0;
         }
     }
