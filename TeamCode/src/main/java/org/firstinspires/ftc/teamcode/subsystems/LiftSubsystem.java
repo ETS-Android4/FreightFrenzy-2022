@@ -19,6 +19,8 @@ public class LiftSubsystem extends SubsystemBase {
         motor.set(-0.4);
     }
 
+    public void setPower(double power) {motor.set(power);}
+
     public void motorStop() {
         motor.stopMotor();
     }
