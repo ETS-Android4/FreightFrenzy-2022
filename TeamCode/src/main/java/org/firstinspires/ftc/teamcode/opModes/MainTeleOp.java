@@ -77,8 +77,8 @@ public class MainTeleOp extends CommandOpMode {
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
 
-        //operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
-        //operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
+        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
+        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(this.floorActivateCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(this.armExtendCommand);
