@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.commands.arm.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
 
 @TeleOp
-public class WristTest extends CommandOpMode {
+public class AemTest extends CommandOpMode {
     //motors
     private Motor armMotor;
 

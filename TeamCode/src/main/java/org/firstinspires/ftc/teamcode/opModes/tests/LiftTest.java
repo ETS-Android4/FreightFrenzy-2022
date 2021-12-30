@@ -3,18 +3,16 @@ package org.firstinspires.ftc.teamcode.opModes.tests;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.checkerframework.checker.units.qual.A;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmOpenLoopCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.LiftOpenLoopCommand;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
-public class ArmTest extends CommandOpMode {
+public class LiftTest extends CommandOpMode {
     private Motor liftMotor;
 
     private LiftSubsystem liftSubsystem;
 
-    private ArmOpenLoopCommand armOpenLoopCommand;
+    private LiftOpenLoopCommand wristOpenLoopCommand;
 
     private GamepadEx driver;
 
@@ -26,10 +24,10 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-        this.armOpenLoopCommand = new ArmOpenLoopCommand(liftSubsystem, driver.getLeftY());
+        this.wristOpenLoopCommand = new LiftOpenLoopCommand(liftSubsystem, driver.getLeftY());
 
         register(this.liftSubsystem);
 
-        this.liftSubsystem.setDefaultCommand(armOpenLoopCommand);
+        this.liftSubsystem.setDefaultCommand(wristOpenLoopCommand);
     }
 }
