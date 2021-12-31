@@ -43,7 +43,7 @@ public class ArmTest extends CommandOpMode {
         this.driver = new GamepadEx(gamepad1);
 
         if(!limit.isPressed()) {
-            driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.retractCommand);
+            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
         }
 
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
