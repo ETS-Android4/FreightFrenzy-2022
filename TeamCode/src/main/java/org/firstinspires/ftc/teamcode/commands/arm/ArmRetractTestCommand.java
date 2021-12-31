@@ -13,7 +13,8 @@ public class ArmRetractTestCommand extends CommandBase {
 
     @Override
     public void execute() {
-        armSubsystem.reduce();
+        if (!armSubsystem.getState())
+            armSubsystem.reduce();
     }
 
     @Override
