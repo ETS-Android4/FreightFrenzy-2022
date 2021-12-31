@@ -4,21 +4,20 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.TouchSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;;
 
 import org.firstinspires.ftc.teamcode.commands.arm.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
+import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 @TeleOp
 public class ArmTest extends CommandOpMode {
     //motors
     private Motor armMotor;
 
-    private TouchSensor limit;
+    private RevTouchSensor limit;
 
     //subsystems
     private WristSubsystem armSubsystem;
@@ -34,7 +33,7 @@ public class ArmTest extends CommandOpMode {
     public void initialize() {
         this.armMotor = new Motor(hardwareMap, "arm");
 
-        //this.limit = hardwareMap.get(TouchSensor.class, "limit");
+        this.limit = new RevTouchSensor(hardwareMap, "limit");
 
         this.armSubsystem = new WristSubsystem(armMotor);
 
@@ -43,9 +42,10 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-        //if(!limit.isPressed()) {
-            driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
+        if(!limit.isPressed()) {
             driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.retractCommand);
-        //}
+        }
+
+        driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
     }
 }
