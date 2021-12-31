@@ -48,7 +48,7 @@ public class ArmTest extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
 
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new RunCommand(() -> {
-            if (!armSubsystem.getState()) {
+            if (!armSubsystem.getState() || !retractCommand.isScheduled()) {
                 this.retractCommand.schedule();
             }
         }));
