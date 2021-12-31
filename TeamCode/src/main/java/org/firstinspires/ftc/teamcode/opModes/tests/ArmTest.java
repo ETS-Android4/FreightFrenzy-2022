@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opModes.tests;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.RunCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -42,8 +43,14 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
+//            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
 
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
+
+        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new RunCommand(() -> {
+            if (!armSubsystem.getState()) {
+                this.retractCommand.schedule();
+            }
+        }));
     }
 }

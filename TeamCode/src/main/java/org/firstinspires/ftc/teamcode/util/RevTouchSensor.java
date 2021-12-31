@@ -21,7 +21,7 @@ public class RevTouchSensor implements TouchSensor, HardwareDevice {
 
     @Override
     public boolean isPressed() {
-        return touchSensor.getState();
+        return !touchSensor.getState();
     }
 
     @Override
