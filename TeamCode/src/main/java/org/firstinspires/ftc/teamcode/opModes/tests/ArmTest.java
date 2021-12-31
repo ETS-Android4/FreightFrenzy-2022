@@ -34,7 +34,7 @@ public class ArmTest extends CommandOpMode {
     public void initialize() {
         this.armMotor = new Motor(hardwareMap, "arm");
 
-        this.limit = hardwareMap.get(TouchSensor.class, "limit");
+        //this.limit = hardwareMap.get(TouchSensor.class, "limit");
 
         this.armSubsystem = new WristSubsystem(armMotor);
 
@@ -43,14 +43,9 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-        if(!limit.isPressed()) {
-            if (driver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0) {
-                schedule(this.extendCommand);
-            }
-
-            if (driver.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0) {
-                schedule(this.retractCommand);
-            }
-        }
+        //if(!limit.isPressed()) {
+            driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
+            driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.retractCommand);
+        //}
     }
 }

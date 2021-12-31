@@ -9,15 +9,14 @@ public class WristSubsystem extends CommandBase {
 
     public WristSubsystem(Motor motor){
         this.armMotor = motor;
-        armMotor.setInverted(true);
     }
 
     public void raise() {
-        armMotor.set(0.4);
+        armMotor.set(1.0);
     }
 
     public void reduce() {
-        armMotor.set(-0.4);
+        armMotor.set(-1.0);
     }
 
     public void stop() {
