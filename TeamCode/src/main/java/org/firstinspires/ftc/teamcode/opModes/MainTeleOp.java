@@ -96,5 +96,6 @@ public class MainTeleOp extends CommandOpMode {
         register(this.mecanumDriveSubsystem, this.liftSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
         this.liftSubsystem.setDefaultCommand(this.liftCommand);
+        telemetry.addData("abc","123");
     }
 }
