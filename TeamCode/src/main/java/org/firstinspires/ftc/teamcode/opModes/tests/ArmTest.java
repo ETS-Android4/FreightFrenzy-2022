@@ -43,14 +43,14 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-//            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
+            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
 
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
 
-        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new RunCommand(() -> {
-            if (!armSubsystem.getState() || !retractCommand.isScheduled()) {
-                this.retractCommand.schedule();
-            }
-        }));
+//        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new RunCommand(() -> {
+//            if (!armSubsystem.getState() || !retractCommand.isScheduled()) {
+//                this.retractCommand.schedule();
+//            }
+//        }));
     }
 }
