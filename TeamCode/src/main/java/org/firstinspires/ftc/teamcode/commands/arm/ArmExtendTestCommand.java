@@ -17,6 +17,9 @@ public class ArmExtendTestCommand extends CommandBase {
     }
 
     @Override
+    public boolean isFinished() { return armSubsystem.getState(); }
+
+    @Override
     public void end(boolean interrupted) {
         armSubsystem.stop();
     }

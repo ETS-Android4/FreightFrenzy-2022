@@ -35,16 +35,14 @@ public class ArmTest extends CommandOpMode {
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
 
-        this.armSubsystem = new WristSubsystem(armMotor);
+        this.armSubsystem = new WristSubsystem(armMotor, limit);
 
         this.extendCommand = new ArmExtendTestCommand(armSubsystem);
         this.retractCommand = new ArmRetractTestCommand(armSubsystem);
 
         this.driver = new GamepadEx(gamepad1);
 
-        if(!limit.isPressed()) {
             driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
-        }
 
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
     }
