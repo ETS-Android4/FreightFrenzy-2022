@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands.arm;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
@@ -34,7 +35,7 @@ public class ArmExtendCommand extends CommandBase {
             level++;
         } else if (level == 3) {
             armSubsystem.reduce();
-            timeToMove = 1.5;
+            timeToMove = 1;
             level = 0;
         }
     }
