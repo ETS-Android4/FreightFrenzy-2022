@@ -1,16 +1,17 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.util.Timing;
 
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
-public class WristSubsystem extends CommandBase {
+public class ArmSubsystem extends SubsystemBase {
     private final Motor armMotor;
     private final RevTouchSensor limitSwitch;
 
-    public WristSubsystem(Motor motor, RevTouchSensor revTouchSensor){
+    public ArmSubsystem(Motor motor, RevTouchSensor revTouchSensor){
         this.armMotor = motor;
         this.limitSwitch = revTouchSensor;
     }
@@ -22,6 +23,8 @@ public class WristSubsystem extends CommandBase {
     public void reduce() {
         armMotor.set(-1.0);
     }
+
+    public void setPower(double power) {armMotor.set(power);}
 
     public void stop() {
         armMotor.stopMotor();

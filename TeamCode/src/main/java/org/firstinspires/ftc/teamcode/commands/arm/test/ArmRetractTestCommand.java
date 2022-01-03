@@ -1,14 +1,14 @@
-package org.firstinspires.ftc.teamcode.commands.arm;
+package org.firstinspires.ftc.teamcode.commands.arm.test;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
-import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class ArmRetractTestCommand extends CommandBase {
-    private WristSubsystem armSubsystem;
+    private ArmSubsystem armSubsystem;
 
-    public ArmRetractTestCommand(WristSubsystem wristSubsystem) {
-        this.armSubsystem = wristSubsystem;
+    public ArmRetractTestCommand(ArmSubsystem armSubsystem) {
+        this.armSubsystem = armSubsystem;
     }
 
     @Override

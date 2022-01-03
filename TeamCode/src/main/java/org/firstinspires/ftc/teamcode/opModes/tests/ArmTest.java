@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.opModes.tests;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.RunCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;;
 
-import org.firstinspires.ftc.teamcode.commands.arm.ArmExtendTestCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmRetractTestCommand;
-import org.firstinspires.ftc.teamcode.subsystems.WristSubsystem;
+import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 @TeleOp
@@ -21,7 +20,7 @@ public class ArmTest extends CommandOpMode {
     private RevTouchSensor limit;
 
     //subsystems
-    private WristSubsystem armSubsystem;
+    private ArmSubsystem armSubsystem;
 
     //commands
     private ArmExtendTestCommand extendCommand;
@@ -36,7 +35,7 @@ public class ArmTest extends CommandOpMode {
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
 
-        this.armSubsystem = new WristSubsystem(armMotor, limit);
+        this.armSubsystem = new ArmSubsystem(armMotor, limit);
 
         this.extendCommand = new ArmExtendTestCommand(armSubsystem);
         this.retractCommand = new ArmRetractTestCommand(armSubsystem);
