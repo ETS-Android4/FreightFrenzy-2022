@@ -21,8 +21,6 @@ public class  DrivetrainTest extends CommandOpMode {
     //gamepads
     private GamepadEx driver;
 
-    HardwareMap hwMap = null;
-
     @Override
     public void initialize() {
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);

@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.opModes.tests;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.arm.LiftOpenLoopCommand;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
+@TeleOp(name = "LiftTest")
 public class LiftTest extends CommandOpMode {
     private Motor liftMotor;
 

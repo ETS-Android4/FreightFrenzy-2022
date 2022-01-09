@@ -11,6 +11,7 @@ public class LiftOpenLoopCommand extends CommandBase {
     public LiftOpenLoopCommand(LiftSubsystem lift, double power) {
         this.armSubsystem = lift;
         this.power = power;
+        addRequirements(this.armSubsystem);
     }
 
     @Override
