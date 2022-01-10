@@ -18,7 +18,7 @@ public class ArmPIDSubsystem extends ProfiledPIDSubsystem {
     private static final double kP = 1.0;
     private static final double kI = 0;
     private static final double kD = 0;
-    private final ArmFeedforward armFeedforward = new ArmFeedforward(kS, kCos, kV, kA);
+//    private final ArmFeedforward armFeedforward = new ArmFeedforward(kS, kCos, kV, kA);
     private final double distancePerPulse = Math.PI * 0.05 / 537.7; //change based on encoder pulses for given motor
     private final Motor armMotor;
 
@@ -31,8 +31,8 @@ public class ArmPIDSubsystem extends ProfiledPIDSubsystem {
 
     @Override
     protected void useOutput(double output, TrapezoidProfile.State setPoint) {
-        double feedForward = armFeedforward.calculate(setPoint.position, setPoint.velocity, 1); // idk what to set accel to
-        armMotor.set(((output + feedForward) / distancePerPulse) / armMotor.ACHIEVABLE_MAX_TICKS_PER_SECOND);
+//        double feedForward = armFeedforward.calculate(setPoint.position, setPoint.velocity, 1); // idk what to set accel to
+//        armMotor.set(((output + feedForward) / distancePerPulse) / armMotor.ACHIEVABLE_MAX_TICKS_PER_SECOND);
     }
 
     @Override

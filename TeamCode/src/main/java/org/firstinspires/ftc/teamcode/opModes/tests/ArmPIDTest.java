@@ -24,7 +24,7 @@ public class ArmPIDTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.armMotor = new Motor(hardwareMap, "armMotor");
+        this.armMotor = new Motor(hardwareMap, "arm");
 
         this.armSubsystem = new ArmPIDSubsystem(armMotor);
 
