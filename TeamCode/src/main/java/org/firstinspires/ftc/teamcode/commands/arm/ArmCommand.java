@@ -34,4 +34,9 @@ public class ArmCommand extends CommandBase {
 
         }
     }
+
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
 }
