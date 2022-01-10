@@ -15,7 +15,7 @@ public class ArmPIDSubsystem extends ProfiledPIDSubsystem {
     private static final double kCos = 1.0;
     private static final double kV = 1.0;
     private static final double kA = 1.0;
-    private static final double kP = 1.0;
+    private static final double kP = 10.0;
     private static final double kI = 0;
     private static final double kD = 0;
 //    private final ArmFeedforward armFeedforward = new ArmFeedforward(kS, kCos, kV, kA);
