@@ -39,4 +39,9 @@ public class ArmCommand extends CommandBase {
     public boolean isFinished(){
         return subsystem.atPosition();
     }
+
+    @Override
+    public void end(boolean interrupted){
+        subsystem.stopMotor();
+    }
 }
