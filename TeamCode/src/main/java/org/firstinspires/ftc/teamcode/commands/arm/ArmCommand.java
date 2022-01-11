@@ -18,20 +18,25 @@ public class ArmCommand extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        if (level == 0) {
-            subsystem.setGoal(0.5);
-            level++;
-            telemetry.addData("Help", level);
-        } else if (level == 1) {
-            subsystem.setGoal(1);
-            level++;
-            telemetry.addData("Help", level);
-        } else if (level == 2) {
-            subsystem.setGoal(10);
-            level = 0;
-            telemetry.addData("Help", level);
+    public void execute() {
+        subsystem.moveToPosition(2);
+////        if (level == 0) {
+//            subsystem.moveToPosition(0.5);
+//            level++;
+//            telemetry.addData("Help", level);
+////        } else if (level == 1) {
+//            subsystem.moveToPosition(1);
+//            level++;
+//            telemetry.addData("Help", level);
+////        } else if (level == 2) {
+//            subsystem.setGoal(10);
+//            level = 0;
+//            telemetry.addData("Help", level);
+//        }
+    }
 
-        }
+    @Override
+    public boolean isFinished(){
+        return subsystem.atPosition();
     }
 }

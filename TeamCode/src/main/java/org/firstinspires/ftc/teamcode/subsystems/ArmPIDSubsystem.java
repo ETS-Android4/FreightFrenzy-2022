@@ -5,41 +5,41 @@ package org.firstinspires.ftc.teamcode.subsystems;
  * might need to change this to match arm pid
  */
 
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.ArmFeedforward;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.ProfiledPIDController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.trajectory.TrapezoidProfile;
 
-public class ArmPIDSubsystem extends ProfiledPIDSubsystem {
-    private static final double kS = 1.0;
-    private static final double kCos = 1.0;
-    private static final double kV = 1.0;
-    private static final double kA = 1.0;
-    private static final double kP = 10.0;
-    private static final double kI = 0;
-    private static final double kD = 0;
+public class ArmPIDSubsystem extends SubsystemBase {
+//    private static final double kS = 1.0;
+//    private static final double kCos = 1.0;
+//    private static final double kV = 1.0;
+//    private static final double kA = 1.0;
+//    private static final double kP = 10.0;
+//    private static final double kI = 0;
+//    private static final double kD = 0;
 //    private final ArmFeedforward armFeedforward = new ArmFeedforward(kS, kCos, kV, kA);
-    private final double distancePerPulse = Math.PI * 0.05 / 537.7; //change based on encoder pulses for given motor
+//    private final double distancePerPulse = Math.PI * 0.05 / 537.7; //change based on encoder pulses for given motor
     private final Motor armMotor;
 
     public ArmPIDSubsystem(Motor motor) {
-        super(new ProfiledPIDController(kP, kI, kD, new TrapezoidProfile.Constraints(5.0, 3.0)), 0.0);
         this.armMotor = motor;
-
-        armMotor.encoder.setDistancePerPulse(distancePerPulse);
+        armMotor.setInverted(true);
+//        armMotor.encoder.setDistancePerPulse(distancePerPulse);
     }
 
-    @Override
-    protected void useOutput(double output, TrapezoidProfile.State setPoint) {
-//        double feedForward = armFeedforward.calculate(setPoint.position, setPoint.velocity, 1); // idk what to set accel to
-//        armMotor.set(((output + feedForward) / distancePerPulse) / armMotor.ACHIEVABLE_MAX_TICKS_PER_SECOND);
+    public void moveToPosition(int position){
+        armMotor.setRunMode(Motor.RunMode.PositionControl);
+        armMotor.setTargetPosition(position);
+        armMotor.setPositionCoefficient(0.05);
+        armMotor.setPositionTolerance(13.6);
+        armMotor.set(0.75);
     }
 
-    @Override
-    protected double getMeasurement() {
-        return armMotor.encoder.getDistance();
+    public boolean atPosition(){
+        return armMotor.atTargetPosition();
     }
-
     public void setMotor() {
         armMotor.set(0.5);
     }
