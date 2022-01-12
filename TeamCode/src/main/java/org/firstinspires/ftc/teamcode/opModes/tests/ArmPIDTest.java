@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.MaintainHeightCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 
 @TeleOp
@@ -19,6 +20,7 @@ public class ArmPIDTest extends CommandOpMode {
 
     //commands
     private ArmCommand armCommand;
+    private MaintainHeightCommand heightCommand;
 
     //gamepads
     private GamepadEx driver;
@@ -30,8 +32,12 @@ public class ArmPIDTest extends CommandOpMode {
         this.armSubsystem = new ArmPIDSubsystem(armMotor);
 
         this.armCommand = new ArmCommand(armSubsystem, telemetry);
+        this.heightCommand = new MaintainHeightCommand(armSubsystem);
         this.driver = new GamepadEx(gamepad1);
 
         driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armCommand);
+
+        register(armSubsystem);
+        this.armSubsystem.setDefaultCommand(heightCommand);
     }
 }

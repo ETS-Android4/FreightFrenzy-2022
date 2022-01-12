@@ -6,38 +6,27 @@ package org.firstinspires.ftc.teamcode.subsystems;
  */
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.controller.wpilibcontroller.ArmFeedforward;
-import com.arcrobotics.ftclib.controller.wpilibcontroller.ProfiledPIDController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.trajectory.TrapezoidProfile;
 
 public class ArmPIDSubsystem extends SubsystemBase {
-//    private static final double kS = 1.0;
-//    private static final double kCos = 1.0;
-//    private static final double kV = 1.0;
-//    private static final double kA = 1.0;
-//    private static final double kP = 10.0;
-//    private static final double kI = 0;
-//    private static final double kD = 0;
-//    private final ArmFeedforward armFeedforward = new ArmFeedforward(kS, kCos, kV, kA);
-//    private final double distancePerPulse = Math.PI * 0.05 / 537.7; //change based on encoder pulses for given motor
     private final Motor armMotor;
+    private int desiredPosition;
 
     public ArmPIDSubsystem(Motor motor) {
         this.armMotor = motor;
+        armMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
+        armMotor.encoder.setDirection(Motor.Direction.REVERSE);
         armMotor.setInverted(true);
-//        armMotor.encoder.setDistancePerPulse(distancePerPulse);
     }
 
-    public void moveToPosition(int position){
+    public void moveToPosition(int position) {
         armMotor.setRunMode(Motor.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
-        armMotor.setPositionCoefficient(5);
-        armMotor.setPositionTolerance(13.6);
-        armMotor.set(-0.75);
+        armMotor.setPositionCoefficient(3);
+        armMotor.set(0.75);
     }
 
-    public boolean atPosition(){
+    public boolean atPosition() {
         return armMotor.atTargetPosition();
     }
 
@@ -45,7 +34,11 @@ public class ArmPIDSubsystem extends SubsystemBase {
         armMotor.stopMotor();
     }
 
-    public void setMotor() {
-        armMotor.set(0.5);
+    public int getDesiredPosition() {
+        return desiredPosition;
+    }
+
+    public void setDesiredPosition(int desiredPosition) {
+        this.desiredPosition = desiredPosition;
     }
 }

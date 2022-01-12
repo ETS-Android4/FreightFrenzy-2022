@@ -7,32 +7,31 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 
 public class ArmCommand extends CommandBase {
     private final ArmPIDSubsystem subsystem;
-    private int level;
     private final Telemetry telemetry;
+    private int level;
 
     public ArmCommand(ArmPIDSubsystem subsystem, Telemetry telemetry) {
-        this.subsystem = subsystem;
         level = 0;
+        this.subsystem = subsystem;
         this.telemetry = telemetry;
         addRequirements(subsystem);
     }
 
     @Override
     public void execute() {
-        subsystem.moveToPosition(2);
-////        if (level == 0) {
-//            subsystem.moveToPosition(0.5);
-//            level++;
-//            telemetry.addData("Help", level);
-////        } else if (level == 1) {
-//            subsystem.moveToPosition(1);
-//            level++;
-//            telemetry.addData("Help", level);
-////        } else if (level == 2) {
-//            subsystem.setGoal(10);
-//            level = 0;
-//            telemetry.addData("Help", level);
-//        }
+        if(level == 0) {
+            subsystem.moveToPosition(200);
+            subsystem.setDesiredPosition(200);
+            level++;
+        } else if (level == 1){
+            subsystem.moveToPosition(250);
+            subsystem.setDesiredPosition(250);
+            level++;
+        } else {
+            subsystem.moveToPosition(300);
+            subsystem.setDesiredPosition(300);
+            level = 0;
+        }
     }
 
     @Override
