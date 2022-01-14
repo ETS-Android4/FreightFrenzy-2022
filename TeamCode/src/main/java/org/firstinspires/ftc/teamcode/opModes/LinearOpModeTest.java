@@ -19,8 +19,14 @@ public class LinearOpModeTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         armMotor = new Motor(hardwareMap, "arm");
         subsystem = new ArmPIDSubsystem(armMotor);
+
+        waitForStart();
         while (opModeIsActive()) {
             if (gamepad1.dpad_up) {
+                telemetry.addData("Running: ", true);
+                telemetry.addData("Level: ", level);
+                telemetry.update();
+
                 if (level == 0) {
                     subsystem.setDesiredPosition(300);
                     level++;
@@ -33,6 +39,12 @@ public class LinearOpModeTest extends LinearOpMode {
                 }
             }
             subsystem.setMotorPosition(subsystem.getDesiredPosition());
+            while (!subsystem.atPosition()){
+                subsystem.moveToPosition();
+            }
+            subsystem.stopMotor();
+            //telemetry.addData("Is working", true);
+            //telemetry.update();
         }
     }
 }

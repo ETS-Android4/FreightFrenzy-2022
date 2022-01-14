@@ -23,7 +23,7 @@ public class ArmPIDSubsystem extends SubsystemBase {
     public void setMotorPosition(int position){
         armMotor.setRunMode(Motor.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
-        armMotor.setPositionCoefficient(3);
+        armMotor.setPositionCoefficient(10);
     }
 
     public void moveToPosition() {
