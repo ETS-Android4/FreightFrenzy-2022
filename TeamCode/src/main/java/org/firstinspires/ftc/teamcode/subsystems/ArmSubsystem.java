@@ -10,10 +10,12 @@ import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 public class ArmSubsystem extends SubsystemBase {
     private final Motor armMotor;
     private final RevTouchSensor limitSwitch;
+    private int level;
 
     public ArmSubsystem(Motor motor, RevTouchSensor revTouchSensor){
         this.armMotor = motor;
         this.limitSwitch = revTouchSensor;
+        level = 0;
     }
 
     public void raise() {
@@ -31,6 +33,16 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public boolean getState() { return limitSwitch.isPressed(); }
+
+    public void slightUp() {  armMotor.set(0.5); }
+
+    public void slightDown() { armMotor.set(-0.5); }
+
+    public int getLevel() { return level; }
+
+    public void setLevel(int level) { this.level = level; }
+
+    public void resetLevel() { this.level = 0; }
 
 
 

@@ -22,29 +22,39 @@ public class LinearOpModeTest extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-            if (gamepad1.dpad_up) {
-                telemetry.addData("Running: ", true);
-                telemetry.addData("Level: ", level);
-                telemetry.update();
+//            if (gamepad1.dpad_up) {
+//                telemetry.addData("Running: ", true);
+//                telemetry.addData("Level: ", level);
+//                telemetry.update();
+//
+//                if (level == 0) {
+//                    subsystem.setDesiredPosition(300);
+//                    level++;
+//                } else if(level == 1) {
+//                    subsystem.setDesiredPosition(500);
+//                    level++;
+//                } else {
+//                    subsystem.setDesiredPosition(700);
+//                    level = 0;
+//                }
+//            }
+//            subsystem.setMotorPosition(subsystem.getDesiredPosition());
+//            while (!subsystem.atPosition()){
+//                subsystem.moveToPosition();
+//            }
+//            subsystem.stopMotor();
+//            //telemetry.addData("Is working", true);
+//            //telemetry.update();
 
-                if (level == 0) {
-                    subsystem.setDesiredPosition(300);
-                    level++;
-                } else if(level == 1) {
-                    subsystem.setDesiredPosition(500);
-                    level++;
-                } else {
-                    subsystem.setDesiredPosition(700);
-                    level = 0;
-                }
+            subsystem.armMotor.setTargetPosition(500);
+            subsystem.armMotor.resetEncoder();
+
+            while (!subsystem.armMotor.atTargetPosition()) {
+                subsystem.armMotor.set(0.75);
+                telemetry.addData("Position", subsystem.armMotor.encoder.getPosition());
+                telemetry.update();
             }
-            subsystem.setMotorPosition(subsystem.getDesiredPosition());
-            while (!subsystem.atPosition()){
-                subsystem.moveToPosition();
-            }
-            subsystem.stopMotor();
-            //telemetry.addData("Is working", true);
-            //telemetry.update();
+            subsystem.armMotor.stopMotor();
         }
     }
 }

@@ -9,7 +9,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 
 public class ArmPIDSubsystem extends SubsystemBase {
-    private final Motor armMotor;
+    public final Motor armMotor;
     private int desiredPosition;
 
     public ArmPIDSubsystem(Motor motor) {
