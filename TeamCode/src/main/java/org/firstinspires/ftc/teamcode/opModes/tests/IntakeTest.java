@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
-@TeleOp
+@TeleOp(group = "tests")
 public class IntakeTest extends CommandOpMode {
     //motors
     private Motor intakeL, intakeR;

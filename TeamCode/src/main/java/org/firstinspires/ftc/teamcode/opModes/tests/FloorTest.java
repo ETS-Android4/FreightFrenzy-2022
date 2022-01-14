@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.commands.floor.FloorActivateCommand;
 import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 
-@TeleOp
+@TeleOp(group = "tests")
 public class FloorTest extends CommandOpMode {
     //motors
     private SimpleServo floor;

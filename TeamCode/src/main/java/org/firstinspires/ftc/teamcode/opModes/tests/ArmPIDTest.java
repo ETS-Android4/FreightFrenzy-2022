@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opModes.tests;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -10,8 +11,10 @@ import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.MaintainHeightCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 
-@TeleOp
+@TeleOp(group = "tests")
 public class ArmPIDTest extends CommandOpMode {
+    private int level = 0;
+
     //motors
     private Motor armMotor;
 
@@ -19,7 +22,6 @@ public class ArmPIDTest extends CommandOpMode {
     private ArmPIDSubsystem armSubsystem;
 
     //commands
-    private ArmCommand armCommand;
     private MaintainHeightCommand heightCommand;
 
     //gamepads
@@ -31,11 +33,24 @@ public class ArmPIDTest extends CommandOpMode {
 
         this.armSubsystem = new ArmPIDSubsystem(armMotor);
 
-        this.armCommand = new ArmCommand(armSubsystem, telemetry);
-        this.heightCommand = new MaintainHeightCommand(armSubsystem);
+        this.heightCommand = new MaintainHeightCommand(armSubsystem, telemetry);
         this.driver = new GamepadEx(gamepad1);
 
-        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armCommand);
+        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(
+            new InstantCommand(() -> {
+                    if (level == 0) {
+                        armSubsystem.setDesiredPosition(300);
+                        level++;
+                    } else if(level == 1) {
+                        armSubsystem.setDesiredPosition(500);
+                        level++;
+                    } else {
+                        armSubsystem.setDesiredPosition(700);
+                        level = 0;
+                    }
+                }
+            )
+        );
 
         register(armSubsystem);
         this.armSubsystem.setDefaultCommand(heightCommand);

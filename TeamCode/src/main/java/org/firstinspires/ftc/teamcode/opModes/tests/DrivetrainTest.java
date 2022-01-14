@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 
-@TeleOp
+@TeleOp(group = "tests")
 public class  DrivetrainTest extends CommandOpMode {
     //motors
     //subsystems

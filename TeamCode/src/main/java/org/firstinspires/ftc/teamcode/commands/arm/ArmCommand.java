@@ -20,15 +20,18 @@ public class ArmCommand extends CommandBase {
     @Override
     public void execute() {
         if(level == 0) {
-            subsystem.moveToPosition(200);
+            subsystem.setMotorPosition(200);
+            subsystem.moveToPosition();
             subsystem.setDesiredPosition(200);
             level++;
         } else if (level == 1){
-            subsystem.moveToPosition(250);
+            subsystem.setMotorPosition(250);
+            subsystem.moveToPosition();
             subsystem.setDesiredPosition(250);
             level++;
         } else {
-            subsystem.moveToPosition(300);
+            subsystem.setMotorPosition(300);
+            subsystem.moveToPosition();
             subsystem.setDesiredPosition(300);
             level = 0;
         }

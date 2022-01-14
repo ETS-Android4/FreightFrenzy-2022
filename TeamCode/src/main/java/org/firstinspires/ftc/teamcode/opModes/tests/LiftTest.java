@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.commands.arm.LiftOpenLoopCommand;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
-@TeleOp(name = "LiftTest")
+@TeleOp(name = "LiftTest", group = "tests")
 public class LiftTest extends CommandOpMode {
     private Motor liftMotor;
 

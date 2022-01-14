@@ -14,20 +14,28 @@ public class ArmPIDSubsystem extends SubsystemBase {
 
     public ArmPIDSubsystem(Motor motor) {
         this.armMotor = motor;
-        armMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
+        armMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         armMotor.encoder.setDirection(Motor.Direction.REVERSE);
-        armMotor.setInverted(true);
+        armMotor.encoder.reset();
+        armMotor.setInverted(false);
     }
 
-    public void moveToPosition(int position) {
+    public void setMotorPosition(int position){
         armMotor.setRunMode(Motor.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
         armMotor.setPositionCoefficient(3);
+    }
+
+    public void moveToPosition() {
         armMotor.set(0.75);
     }
 
     public boolean atPosition() {
         return armMotor.atTargetPosition();
+    }
+
+    public int currentPosition(){
+        return armMotor.getCurrentPosition();
     }
 
     public void stopMotor() {
