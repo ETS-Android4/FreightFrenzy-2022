@@ -12,6 +12,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmExtendCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmOpenLoopCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.LiftOpenLoopCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.test.LiftDropTestCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.test.LiftRaiseTestCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.floor.FloorActivateCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
@@ -42,11 +46,12 @@ public class MainTeleOp extends CommandOpMode {
     private MecanumDriveSubsystem mecanumDriveSubsystem;
 
     //commands
-    private LiftOpenLoopCommand liftCommand;
-    private ArmOpenLoopCommand armCommand;
+    private LiftRaiseTestCommand liftRaiseCommand;
+    private LiftDropTestCommand liftDropCommand;
+    private ArmExtendTestCommand armExtendCommand;
+    private ArmRetractTestCommand armRetractCommand;
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
-    private ArmExtendCommand armExtendCommand;
     private FloorActivateCommand floorActivateCommand;
     private MecanumDriveCommand mecanumDriveCommand;
 
@@ -71,34 +76,37 @@ public class MainTeleOp extends CommandOpMode {
         );
 
         this.intakeSubsystem = new IntakeSubsystem(this.intake);
-        this.armSubsystem = new ArmSubsystem(this.armMotor, limit);
+        this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.floorSubsystem = new FloorSubsystem(this.floor);
         this.liftSubsystem = new LiftSubsystem(liftMotorL, liftMotorR);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
-        this.armExtendCommand = new ArmExtendCommand(this.armSubsystem, time);
+        this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
+        this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
         this.floorActivateCommand = new FloorActivateCommand(this.floorSubsystem);
-        this.liftCommand = new LiftOpenLoopCommand(this.liftSubsystem, operator.getLeftY());
-        this.armCommand = new ArmOpenLoopCommand(this.armSubsystem, operator.getLeftX());
+        this.liftRaiseCommand = new LiftRaiseTestCommand(this.liftSubsystem);
+        this.liftDropCommand = new LiftDropTestCommand(this.liftSubsystem);
+
+        driver = new GamepadEx(gamepad1);
+        operator = new GamepadEx(gamepad2);
 
         this.mecanumDriveCommand = new MecanumDriveCommand(this.mecanumDriveSubsystem, () -> driver.getLeftY(),
                 driver::getLeftX, driver::getRightX
         );
 
-        driver = new GamepadEx(gamepad1);
-        operator = new GamepadEx(gamepad2);
-
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(this.floorActivateCommand);
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(this.armExtendCommand);
+        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
 
-        register(this.mecanumDriveSubsystem, this.liftSubsystem, this.armSubsystem);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenHeld(this.armExtendCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenHeld(this.armRetractCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.liftDropCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.liftRaiseCommand);
+
+        register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
-        this.liftSubsystem.setDefaultCommand(this.liftCommand);
-        this.armSubsystem.setDefaultCommand(this.armCommand);
     }
 }

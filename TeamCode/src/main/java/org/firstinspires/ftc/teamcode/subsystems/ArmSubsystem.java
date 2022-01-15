@@ -16,14 +16,15 @@ public class ArmSubsystem extends SubsystemBase {
         this.armMotor = motor;
         this.limitSwitch = revTouchSensor;
         level = 0;
+        armMotor.setInverted(true);
     }
 
     public void raise() {
-        armMotor.set(1.0);
+        armMotor.set(0.5);
     }
 
     public void reduce() {
-        armMotor.set(-1.0);
+        armMotor.set(-0.5);
     }
 
     public void setPower(double power) {armMotor.set(power);}

@@ -14,11 +14,11 @@ public class LiftSubsystem extends SubsystemBase {
     }
 
     public void motorUp() {
-        liftMotors.set(0.25);
+        liftMotors.set(0.5);
     }
 
     public void motorDown() {
-        liftMotors.set(-0.25);
+        liftMotors.set(-0.3);
     }
 
     public void setPower(double power) {

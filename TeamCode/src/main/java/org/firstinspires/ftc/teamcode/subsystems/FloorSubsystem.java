@@ -11,11 +11,11 @@ public class FloorSubsystem extends SubsystemBase {
     }
 
     public void activate(){
-        servo.turnToAngle(45);
+        servo.rotateByAngle(30);
     }
 
     public void reset(){
-        servo.turnToAngle(0);
+        servo.rotateByAngle(-45);
     }
 
     public void stop(){
