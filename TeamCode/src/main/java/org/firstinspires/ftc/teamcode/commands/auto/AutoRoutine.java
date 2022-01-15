@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.commands.auto;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
+import com.arcrobotics.ftclib.command.WaitUntilCommand;
 
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
@@ -11,8 +13,9 @@ import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 
 public class AutoRoutine extends SequentialCommandGroup {
-    public AutoRoutine(MecanumDriveSubsystem dt, FloorSubsystem floor, LiftSubsystem arm) {
+    public AutoRoutine(MecanumDriveSubsystem dt, FloorSubsystem floor, LiftSubsystem arm, CommandOpMode opMode) {
         addCommands(
+                new WaitUntilCommand(opMode::isStarted),
                 new InstantCommand(() -> arm.motorDown()),
                 new WaitCommand(3000),
                 new InstantCommand(() -> arm.motorStop()),

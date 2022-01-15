@@ -39,7 +39,7 @@ public class AutoOpMode extends CommandOpMode {
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.armSubsystem = new LiftSubsystem(liftMotorL, liftMotorR);
 
-        this.autoRoutine = new AutoRoutine(this.mecanumDriveSubsystem, this.floorSubsystem, this.armSubsystem);
+        this.autoRoutine = new AutoRoutine(this.mecanumDriveSubsystem, this.floorSubsystem, this.armSubsystem, this);
 
         schedule(autoRoutine);
     }
