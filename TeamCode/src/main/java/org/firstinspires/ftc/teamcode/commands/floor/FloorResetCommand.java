@@ -1,20 +1,19 @@
 package org.firstinspires.ftc.teamcode.commands.floor;
 
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 
-public class FloorActivateCommand extends CommandBase {
+public class FloorResetCommand extends CommandBase {
     private FloorSubsystem subsystem;
 
-    public FloorActivateCommand(FloorSubsystem floorSubsystem) {
+    public FloorResetCommand(FloorSubsystem floorSubsystem) {
         subsystem = floorSubsystem;
     }
 
     @Override
     public void execute(){
-        subsystem.activate();
+        subsystem.reset();
     }
 
     @Override
@@ -22,3 +21,4 @@ public class FloorActivateCommand extends CommandBase {
         subsystem.stop();
     }
 }
+

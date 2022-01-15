@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.teamcode.commands.arm.test.LiftDropTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.LiftRaiseTestCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.floor.FloorActivateCommand;
+import org.firstinspires.ftc.teamcode.commands.floor.FloorResetCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -33,7 +35,7 @@ import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 public class MainTeleOp extends CommandOpMode {
     //motors
     private Motor intake, armMotor, liftMotorL, liftMotorR;
-    public SimpleServo floor;
+    public CRServo floor;
 
     private RevTouchSensor limit;
     private ElapsedTime time;
@@ -53,6 +55,7 @@ public class MainTeleOp extends CommandOpMode {
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
     private FloorActivateCommand floorActivateCommand;
+    private FloorResetCommand floorResetCommand;
     private MecanumDriveCommand mecanumDriveCommand;
 
     //gamepads
@@ -70,10 +73,7 @@ public class MainTeleOp extends CommandOpMode {
         this.limit = new RevTouchSensor(hardwareMap, "limit");
         this.time = new ElapsedTime();
 
-        this.floor = new SimpleServo(
-                hardwareMap, "floor", 0, 60,
-                AngleUnit.DEGREES
-        );
+        this.floor = new CRServo(hardwareMap, "floor");
 
         this.intakeSubsystem = new IntakeSubsystem(this.intake);
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
@@ -86,6 +86,7 @@ public class MainTeleOp extends CommandOpMode {
         this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
         this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
         this.floorActivateCommand = new FloorActivateCommand(this.floorSubsystem);
+        this.floorResetCommand = new FloorResetCommand(this.floorSubsystem);
         this.liftRaiseCommand = new LiftRaiseTestCommand(this.liftSubsystem);
         this.liftDropCommand = new LiftDropTestCommand(this.liftSubsystem);
 
@@ -99,7 +100,8 @@ public class MainTeleOp extends CommandOpMode {
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
+        operator.getGamepadButton(GamepadKeys.Button.X).whenHeld(this.floorActivateCommand);
+        operator.getGamepadButton(GamepadKeys.Button.B).whenHeld(this.floorResetCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenHeld(this.armExtendCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenHeld(this.armRetractCommand);

@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 @TeleOp(group = "tests")
 public class FloorTest extends CommandOpMode {
     //motors
-    private SimpleServo floor;
+    private CRServo floor;
 
     //subsystems
     private FloorSubsystem subsystem;
@@ -26,10 +27,7 @@ public class FloorTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.floor = new SimpleServo(
-                hardwareMap, "floor", 0, 60,
-                AngleUnit.DEGREES
-        );
+        this.floor = new CRServo(hardwareMap, "floor");
         this.subsystem = new FloorSubsystem(floor);
         this.command = new FloorActivateCommand(subsystem);
 
