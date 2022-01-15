@@ -4,13 +4,14 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
+
+;
 
 @TeleOp(group = "tests")
 public class ArmTest extends CommandOpMode {
@@ -42,7 +43,7 @@ public class ArmTest extends CommandOpMode {
 
         this.driver = new GamepadEx(gamepad1);
 
-            driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
+        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.retractCommand);
 
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.extendCommand);
 

@@ -3,14 +3,14 @@ package org.firstinspires.ftc.teamcode.commands.arm;
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.LiftPIDSubsystem;
 
 public class ArmCommand extends CommandBase {
-    private final ArmPIDSubsystem subsystem;
+    private final LiftPIDSubsystem subsystem;
     private final Telemetry telemetry;
     private int level;
 
-    public ArmCommand(ArmPIDSubsystem subsystem, Telemetry telemetry) {
+    public ArmCommand(LiftPIDSubsystem subsystem, Telemetry telemetry) {
         level = 0;
         this.subsystem = subsystem;
         this.telemetry = telemetry;

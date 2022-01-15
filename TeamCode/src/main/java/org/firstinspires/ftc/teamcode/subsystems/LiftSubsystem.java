@@ -2,26 +2,30 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 
 public class LiftSubsystem extends SubsystemBase {
 
-    private final Motor motor;
+    private final MotorGroup liftMotors;
 
-    public LiftSubsystem(Motor liftMotor) {
-        motor = liftMotor;
+    public LiftSubsystem(Motor liftMotorL, Motor liftMotorR) {
+        this.liftMotors = new MotorGroup(liftMotorL, liftMotorR);
+        liftMotors.setInverted(true);
     }
 
     public void motorUp() {
-        motor.set(0.7);
+        liftMotors.set(0.25);
     }
 
     public void motorDown() {
-        motor.set(-0.4);
+        liftMotors.set(-0.25);
     }
 
-    public void setPower(double power) {motor.set(power);}
+    public void setPower(double power) {
+        liftMotors.set(power);
+    }
 
     public void motorStop() {
-        motor.stopMotor();
+        liftMotors.stopMotor();
     }
 }

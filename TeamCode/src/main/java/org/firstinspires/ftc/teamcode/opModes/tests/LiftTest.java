@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
 @TeleOp(name = "LiftTest", group = "tests")
 public class LiftTest extends CommandOpMode {
-    private Motor liftMotor;
+    private Motor liftMotorL, liftMotorR;
 
     private LiftSubsystem liftSubsystem;
 
@@ -20,9 +20,10 @@ public class LiftTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.liftMotor = new Motor(hardwareMap, "lift");
+        this.liftMotorL = new Motor(hardwareMap, "liftL");
+        this.liftMotorR = new Motor(hardwareMap, "liftR");
 
-        this.liftSubsystem = new LiftSubsystem(liftMotor);
+        this.liftSubsystem = new LiftSubsystem(liftMotorL, liftMotorR);
 
         this.driver = new GamepadEx(gamepad1);
 

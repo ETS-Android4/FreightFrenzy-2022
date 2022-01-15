@@ -7,19 +7,18 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.MaintainHeightCommand;
-import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.LiftPIDSubsystem;
 
 @TeleOp(group = "tests")
 public class ArmPIDTest extends CommandOpMode {
     private int level = 0;
 
     //motors
-    private Motor armMotor;
+    private Motor armMotorL, armMotorR;
 
     //subsystems
-    private ArmPIDSubsystem armSubsystem;
+    private LiftPIDSubsystem armSubsystem;
 
     //commands
     private MaintainHeightCommand heightCommand;
@@ -29,15 +28,16 @@ public class ArmPIDTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.armMotor = new Motor(hardwareMap, "arm", Motor.GoBILDA.RPM_312);
+        this.armMotorL = new Motor(hardwareMap, "armL");
+        this.armMotorR = new Motor(hardwareMap, "armR");
 
-        this.armSubsystem = new ArmPIDSubsystem(armMotor);
+        this.armSubsystem = new LiftPIDSubsystem(armMotorL, armMotorR);
 
         this.heightCommand = new MaintainHeightCommand(armSubsystem, telemetry);
         this.driver = new GamepadEx(gamepad1);
 
         driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(
-            new InstantCommand(() -> {
+                new InstantCommand(() -> {
                     if (level == 0) {
                         armSubsystem.setDesiredPosition(300);
                         level++;

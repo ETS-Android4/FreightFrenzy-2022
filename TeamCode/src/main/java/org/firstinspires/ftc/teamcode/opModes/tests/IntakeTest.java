@@ -33,7 +33,7 @@ public class IntakeTest extends CommandOpMode {
         this.intakeL = new Motor(hardwareMap, "intakeL");
         this.intakeR = new Motor(hardwareMap, "intakeR");
 
-        this.intakeSubsystem = new IntakeSubsystem(this.intakeL, this.intakeR);
+        this.intakeSubsystem = new IntakeSubsystem(this.intakeL);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
