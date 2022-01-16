@@ -1,9 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.util.Timing;
 
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
@@ -12,7 +10,7 @@ public class ArmSubsystem extends SubsystemBase {
     private final RevTouchSensor limitSwitch;
     private int level;
 
-    public ArmSubsystem(Motor motor, RevTouchSensor revTouchSensor){
+    public ArmSubsystem(Motor motor, RevTouchSensor revTouchSensor) {
         this.armMotor = motor;
         this.limitSwitch = revTouchSensor;
         level = 0;
@@ -27,24 +25,37 @@ public class ArmSubsystem extends SubsystemBase {
         armMotor.set(-0.5);
     }
 
-    public void setPower(double power) {armMotor.set(power);}
+    public void setPower(double power) {
+        armMotor.set(power);
+    }
 
     public void stop() {
         armMotor.stopMotor();
     }
 
-    public boolean getState() { return limitSwitch.isPressed(); }
+    public boolean getState() {
+        return limitSwitch.isPressed();
+    }
 
-    public void slightUp() {  armMotor.set(0.5); }
+    public void slightUp() {
+        armMotor.set(0.5);
+    }
 
-    public void slightDown() { armMotor.set(-0.5); }
+    public void slightDown() {
+        armMotor.set(-0.5);
+    }
 
-    public int getLevel() { return level; }
+    public int getLevel() {
+        return level;
+    }
 
-    public void setLevel(int level) { this.level = level; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-    public void resetLevel() { this.level = 0; }
-
+    public void resetLevel() {
+        this.level = 0;
+    }
 
 
 }
