@@ -18,11 +18,11 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void raise() {
-        armMotor.set(0.5);
+        armMotor.set(0.3);
     }
 
     public void reduce() {
-        armMotor.set(-0.5);
+        armMotor.set(-0.3);
     }
 
     public void setPower(double power) {
