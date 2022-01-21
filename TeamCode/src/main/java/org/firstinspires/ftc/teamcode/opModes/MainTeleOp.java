@@ -1,18 +1,16 @@
 package org.firstinspires.ftc.teamcode.opModes;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.button.Trigger;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.test.LiftDropTestCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.test.LiftRaiseTestCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.floor.FloorActivateCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
@@ -21,7 +19,6 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
@@ -30,7 +27,7 @@ import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 public class MainTeleOp extends CommandOpMode {
     public CRServo floor;
     //motors
-    private Motor intake, armMotor, liftMotorL, liftMotorR;
+    private Motor armMotor, intakeL, intakeR;
     private RevTouchSensor limit;
     private ElapsedTime time;
 
@@ -55,7 +52,8 @@ public class MainTeleOp extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.intake = new Motor(hardwareMap, "intake");
+        this.intakeL = new Motor(hardwareMap, "intakeL");
+        this.intakeR = new Motor(hardwareMap, "intakeR");
         this.armMotor = new Motor(hardwareMap, "arm");
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
@@ -63,7 +61,7 @@ public class MainTeleOp extends CommandOpMode {
 
         this.floor = new CRServo(hardwareMap, "floor");
 
-        this.intakeSubsystem = new IntakeSubsystem(this.intake);
+        this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(this.intakeL, this.intakeR));
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.floorSubsystem = new FloorSubsystem(this.floor);
