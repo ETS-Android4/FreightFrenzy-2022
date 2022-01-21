@@ -36,10 +36,6 @@ public class MecanumDriveSubsystem extends SubsystemBase {
         drive.setPIDFCoefficients(mode, coefficients);
     }
 
-    public void setPoseEstimate(Pose2d pose) {
-        drive.setPoseEstimate(pose);
-    }
-
     public void update() {
         drive.update();
     }
@@ -70,6 +66,10 @@ public class MecanumDriveSubsystem extends SubsystemBase {
 
     public Pose2d getPoseEstimate() {
         return drive.getPoseEstimate();
+    }
+
+    public void setPoseEstimate(Pose2d pose) {
+        drive.setPoseEstimate(pose);
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose) {

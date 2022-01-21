@@ -5,7 +5,6 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.commands.intake.twoMotor.IntakeTwoCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.twoMotor.OuttakeTwoCommand;
@@ -22,6 +21,7 @@ public class IntakeTwoTest extends CommandOpMode {
     private OuttakeTwoCommand outtakeTwoCommand;
 
     private GamepadEx driver;
+
     @Override
     public void initialize() {
         this.intakeL = new Motor(hardwareMap, "liftL");

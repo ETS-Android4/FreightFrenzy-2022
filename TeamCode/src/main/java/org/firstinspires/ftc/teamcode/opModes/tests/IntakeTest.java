@@ -13,20 +13,16 @@ import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
 @TeleOp(group = "tests")
 public class IntakeTest extends CommandOpMode {
+    HardwareMap hwMap = null;
     //motors
     private Motor intakeL, intakeR;
-
     //subsystems
     private IntakeSubsystem intakeSubsystem;
-
     //commands
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
-
     //gamepads
     private GamepadEx driver;
-
-    HardwareMap hwMap = null;
 
     @Override
     public void initialize() {

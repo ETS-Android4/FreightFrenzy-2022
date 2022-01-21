@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 
 public class OuttakeCommand extends CommandBase {
 
-    private IntakeSubsystem intakeSubsystem;
+    private final IntakeSubsystem intakeSubsystem;
 
     public OuttakeCommand(IntakeSubsystem intake) {
         this.intakeSubsystem = intake;

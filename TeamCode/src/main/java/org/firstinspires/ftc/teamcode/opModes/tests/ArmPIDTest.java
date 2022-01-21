@@ -41,7 +41,7 @@ public class ArmPIDTest extends CommandOpMode {
                     if (level == 0) {
                         armSubsystem.setDesiredPosition(300);
                         level++;
-                    } else if(level == 1) {
+                    } else if (level == 1) {
                         armSubsystem.setDesiredPosition(500);
                         level++;
                     } else {
@@ -49,7 +49,7 @@ public class ArmPIDTest extends CommandOpMode {
                         level = 0;
                     }
                 }
-            )
+                )
         );
 
         register(armSubsystem);

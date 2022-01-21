@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.util;
 
-import android.text.method.Touch;
-
 import com.arcrobotics.ftclib.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class RevTouchSensor implements TouchSensor, HardwareDevice {
-    private DigitalChannel touchSensor;
+    private final DigitalChannel touchSensor;
 
     public RevTouchSensor(HardwareMap hardwareMap, String name) {
         this.touchSensor = hardwareMap.get(DigitalChannel.class, name);

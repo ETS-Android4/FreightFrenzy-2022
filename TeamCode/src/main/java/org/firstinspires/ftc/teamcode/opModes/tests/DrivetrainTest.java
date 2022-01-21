@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode.opModes.tests;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 
 @TeleOp(group = "tests")
-public class  DrivetrainTest extends CommandOpMode {
+public class DrivetrainTest extends CommandOpMode {
     //motors
     //subsystems
     private MecanumDriveSubsystem mecanumDriveSubsystem;

@@ -6,10 +6,10 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 
 public class ArmOpenLoopCommand extends CommandBase {
-    private ArmSubsystem armSubsystem;
-    private double power;
+    private final ArmSubsystem armSubsystem;
+    private final double power;
 
-    public ArmOpenLoopCommand(ArmSubsystem armSubsystem, double power){
+    public ArmOpenLoopCommand(ArmSubsystem armSubsystem, double power) {
         this.armSubsystem = armSubsystem;
         this.power = power;
     }

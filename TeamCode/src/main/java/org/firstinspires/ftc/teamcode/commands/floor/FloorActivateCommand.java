@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 
 public class FloorActivateCommand extends CommandBase {
-    private FloorSubsystem subsystem;
+    private final FloorSubsystem subsystem;
     private double timeToMove;
-    private ElapsedTime timer;
+    private final ElapsedTime timer;
     private boolean isOpen;
 
     public FloorActivateCommand(FloorSubsystem floorSubsystem, ElapsedTime time) {
@@ -20,8 +20,8 @@ public class FloorActivateCommand extends CommandBase {
     }
 
     @Override
-    public void execute(){
-        if(isOpen) {
+    public void execute() {
+        if (isOpen) {
             subsystem.reset();
         } else {
             subsystem.activate();
@@ -35,7 +35,7 @@ public class FloorActivateCommand extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted){
+    public void end(boolean interrupted) {
         isOpen = !isOpen;
         subsystem.stop();
     }

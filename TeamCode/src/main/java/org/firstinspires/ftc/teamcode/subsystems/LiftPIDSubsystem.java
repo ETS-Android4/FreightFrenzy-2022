@@ -35,7 +35,7 @@ public class LiftPIDSubsystem extends SubsystemBase {
         return liftMotors.atTargetPosition();
     }
 
-    public int currentPosition(){
+    public int currentPosition() {
         return liftMotors.getCurrentPosition();
     }
 

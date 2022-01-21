@@ -5,7 +5,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
 public class LiftRaiseTestCommand extends CommandBase {
-    private LiftSubsystem liftSubsystem;
+    private final LiftSubsystem liftSubsystem;
 
     public LiftRaiseTestCommand(LiftSubsystem liftSubsystem) {
         this.liftSubsystem = liftSubsystem;

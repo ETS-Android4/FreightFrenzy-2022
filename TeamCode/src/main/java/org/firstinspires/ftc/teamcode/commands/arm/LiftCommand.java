@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
 public class LiftCommand extends CommandBase {
 
-    private LiftSubsystem liftSubsystem;
-    private ElapsedTime time;
+    private final LiftSubsystem liftSubsystem;
+    private final ElapsedTime time;
     private int level = 0;
     private double timeToLift = 0.4;
 
@@ -44,7 +44,7 @@ public class LiftCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if(level != 2)
+        if (level != 2)
             liftSubsystem.motorStop();
     }
 }

@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class ArmSlightCommand extends CommandBase {
-    private ArmSubsystem armSubsystem;
-    private ElapsedTime timer;
-    private boolean isUp;
+    private final ArmSubsystem armSubsystem;
+    private final ElapsedTime timer;
+    private final boolean isUp;
     private double timeToLift;
 
     public ArmSlightCommand(ArmSubsystem subsystem, ElapsedTime timer, boolean isUp) {
@@ -22,7 +22,7 @@ public class ArmSlightCommand extends CommandBase {
     @Override
     public void initialize() {
         timer.reset();
-        if(isUp) {
+        if (isUp) {
             armSubsystem.slightUp();
         } else {
             armSubsystem.slightDown();

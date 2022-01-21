@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 public class ArmExtendCommand extends CommandBase {
     private final ArmSubsystem armSubsystem;
     private double timeToMove;
-    private ElapsedTime time;
+    private final ElapsedTime time;
     private int level;
 
     public ArmExtendCommand(ArmSubsystem armSubsystem, ElapsedTime timer) {
@@ -40,7 +40,7 @@ public class ArmExtendCommand extends CommandBase {
     }
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         return time.seconds() >= timeToMove || armSubsystem.getState();
     }
 

@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class ArmDownCommand extends CommandBase {
-    private ArmSubsystem armSubsystem;
-    private ElapsedTime timer;
+    private final ArmSubsystem armSubsystem;
+    private final ElapsedTime timer;
     private double timeToLift;
 
     public ArmDownCommand(ArmSubsystem armSubsystem, ElapsedTime timer) {
@@ -41,7 +41,7 @@ public class ArmDownCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if(armSubsystem.getLevel() != 0) {
+        if (armSubsystem.getLevel() != 0) {
             armSubsystem.stop();
             armSubsystem.resetLevel();
         }

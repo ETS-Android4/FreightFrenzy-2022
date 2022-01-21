@@ -16,7 +16,7 @@ public class MaintainHeightCommand extends CommandBase {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         subsystem.setMotorPosition(subsystem.getDesiredPosition());
         while (!subsystem.atPosition()) {
             subsystem.moveToPosition();

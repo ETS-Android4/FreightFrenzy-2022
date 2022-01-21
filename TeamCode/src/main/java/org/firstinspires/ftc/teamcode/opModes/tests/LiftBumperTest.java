@@ -10,8 +10,6 @@ import org.firstinspires.ftc.teamcode.commands.arm.test.LiftDropTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.LiftRaiseTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
-;
-
 @TeleOp(group = "tests")
 public class LiftBumperTest extends CommandOpMode {
     //motors

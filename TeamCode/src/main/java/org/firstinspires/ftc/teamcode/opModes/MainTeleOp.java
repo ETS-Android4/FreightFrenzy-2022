@@ -28,10 +28,9 @@ import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 @TeleOp(name = "TeleOp")
 public class MainTeleOp extends CommandOpMode {
+    public CRServo floor;
     //motors
     private Motor intake, armMotor, liftMotorL, liftMotorR;
-    public CRServo floor;
-
     private RevTouchSensor limit;
     private ElapsedTime time;
 

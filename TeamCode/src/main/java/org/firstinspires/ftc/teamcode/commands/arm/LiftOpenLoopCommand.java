@@ -5,8 +5,8 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
 public class LiftOpenLoopCommand extends CommandBase {
-    private LiftSubsystem armSubsystem;
-    private double power;
+    private final LiftSubsystem armSubsystem;
+    private final double power;
 
     public LiftOpenLoopCommand(LiftSubsystem lift, double power) {
         this.armSubsystem = lift;

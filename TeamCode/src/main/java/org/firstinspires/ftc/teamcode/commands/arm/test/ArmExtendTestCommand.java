@@ -5,7 +5,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
 public class ArmExtendTestCommand extends CommandBase {
-    private ArmSubsystem armSubsystem;
+    private final ArmSubsystem armSubsystem;
 
     public ArmExtendTestCommand(ArmSubsystem armSubsystem) {
         this.armSubsystem = armSubsystem;

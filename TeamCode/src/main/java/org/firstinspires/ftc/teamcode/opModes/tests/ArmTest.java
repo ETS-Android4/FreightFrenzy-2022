@@ -11,8 +11,6 @@ import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
-;
-
 @TeleOp(group = "tests")
 public class ArmTest extends CommandOpMode {
     //motors

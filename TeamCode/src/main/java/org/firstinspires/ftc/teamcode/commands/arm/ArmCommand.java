@@ -19,12 +19,12 @@ public class ArmCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(level == 0) {
+        if (level == 0) {
             subsystem.setMotorPosition(200);
             subsystem.moveToPosition();
             subsystem.setDesiredPosition(200);
             level++;
-        } else if (level == 1){
+        } else if (level == 1) {
             subsystem.setMotorPosition(250);
             subsystem.moveToPosition();
             subsystem.setDesiredPosition(250);
@@ -38,12 +38,12 @@ public class ArmCommand extends CommandBase {
     }
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         return subsystem.atPosition();
     }
 
     @Override
-    public void end(boolean interrupted){
+    public void end(boolean interrupted) {
         subsystem.stopMotor();
     }
 }
