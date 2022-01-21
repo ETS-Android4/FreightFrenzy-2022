@@ -26,7 +26,7 @@ public class FloorActivateCommand extends CommandBase {
         } else {
             subsystem.activate();
         }
-        timeToMove = 0.2;
+        timeToMove = 0.5;
     }
 
     @Override

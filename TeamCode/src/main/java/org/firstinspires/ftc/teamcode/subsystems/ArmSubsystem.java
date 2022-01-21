@@ -38,11 +38,11 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void slightUp() {
-        armMotor.set(0.5);
+        armMotor.set(0.2);
     }
 
     public void slightDown() {
-        armMotor.set(-0.5);
+        armMotor.set(-0.2);
     }
 
     public int getLevel() {

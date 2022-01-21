@@ -4,7 +4,6 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.button.Trigger;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.gamepad.TriggerReader;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -94,18 +93,30 @@ public class MainTeleOp extends CommandOpMode {
                 driver::getLeftX, driver::getRightX
         );
 
-        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
-        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
+        driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
+        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
+
+//        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
+//        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
 
-        TriggerReader rtReader = new TriggerReader(operator, GamepadKeys.Trigger.RIGHT_TRIGGER);
-        armExtendTrigger = (new Trigger(rtReader::isDown)).whileActiveContinuous(armExtendCommand);
-        TriggerReader ltReader = new TriggerReader(operator, GamepadKeys.Trigger.LEFT_TRIGGER);
-        armRetractTrigger = (new Trigger(ltReader::isDown)).whileActiveContinuous(armRetractCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.liftDropCommand);
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.liftRaiseCommand);
+        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.liftDropCommand);
+        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.liftRaiseCommand);
+
+//        TriggerReader rtReader = new TriggerReader(operator, GamepadKeys.Trigger.RIGHT_TRIGGER);
+//        armExtendTrigger = new Trigger(rtReader::isDown);
+//        armExtendTrigger.whenActive(this.armExtendCommand);
+//        TriggerReader ltReader = new TriggerReader(operator, GamepadKeys.Trigger.LEFT_TRIGGER);
+//        armRetractTrigger = new Trigger(ltReader::isDown);
+//        armRetractTrigger.whenActive(this.armRetractCommand);
+
+
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenHeld(this.armExtendCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenHeld(this.armRetractCommand);
+//        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.liftDropCommand);
+//        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.liftRaiseCommand);
 
         register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);

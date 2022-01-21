@@ -27,7 +27,7 @@ public class ArmSlightCommand extends CommandBase {
         } else {
             armSubsystem.slightDown();
         }
-        timeToLift = 0.3;
+        timeToLift = 0.1;
     }
 
     @Override
