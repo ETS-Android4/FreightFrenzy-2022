@@ -34,19 +34,13 @@ public class MainTeleOp extends CommandOpMode {
     private RevTouchSensor limit;
     private ElapsedTime time;
 
-    private Trigger armExtendTrigger;
-    private Trigger armRetractTrigger;
-
     //subsystems
-    private LiftSubsystem liftSubsystem;
     private IntakeSubsystem intakeSubsystem;
     private ArmSubsystem armSubsystem;
     private FloorSubsystem floorSubsystem;
     private MecanumDriveSubsystem mecanumDriveSubsystem;
 
     //commands
-    private LiftRaiseTestCommand liftRaiseCommand;
-    private LiftDropTestCommand liftDropCommand;
     private ArmExtendTestCommand armExtendCommand;
     private ArmRetractTestCommand armRetractCommand;
     private IntakeCommand intakeCommand;
@@ -63,8 +57,6 @@ public class MainTeleOp extends CommandOpMode {
     public void initialize() {
         this.intake = new Motor(hardwareMap, "intake");
         this.armMotor = new Motor(hardwareMap, "arm");
-        this.liftMotorL = new Motor(hardwareMap, "liftL");
-        this.liftMotorR = new Motor(hardwareMap, "liftR");
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
         this.time = new ElapsedTime();
@@ -75,15 +67,12 @@ public class MainTeleOp extends CommandOpMode {
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.floorSubsystem = new FloorSubsystem(this.floor);
-        this.liftSubsystem = new LiftSubsystem(liftMotorL, liftMotorR);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
         this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
         this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
         this.floorActivateCommand = new FloorActivateCommand(this.floorSubsystem, this.time);
-        this.liftRaiseCommand = new LiftRaiseTestCommand(this.liftSubsystem);
-        this.liftDropCommand = new LiftDropTestCommand(this.liftSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -95,27 +84,10 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-//        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
-//        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
-
         operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
 
-
-        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.liftDropCommand);
-        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.liftRaiseCommand);
-
-//        TriggerReader rtReader = new TriggerReader(operator, GamepadKeys.Trigger.RIGHT_TRIGGER);
-//        armExtendTrigger = new Trigger(rtReader::isDown);
-//        armExtendTrigger.whenActive(this.armExtendCommand);
-//        TriggerReader ltReader = new TriggerReader(operator, GamepadKeys.Trigger.LEFT_TRIGGER);
-//        armRetractTrigger = new Trigger(ltReader::isDown);
-//        armRetractTrigger.whenActive(this.armRetractCommand);
-
-
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenHeld(this.armExtendCommand);
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenHeld(this.armRetractCommand);
-//        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.liftDropCommand);
-//        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.liftRaiseCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.armExtendCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.armRetractCommand);
 
         register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
