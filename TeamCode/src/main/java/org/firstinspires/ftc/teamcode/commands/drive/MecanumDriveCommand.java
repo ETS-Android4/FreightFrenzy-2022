@@ -23,6 +23,6 @@ public class MecanumDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        drive.drive(Math.pow(leftY.getAsDouble(), 3), Math.pow(-leftX.getAsDouble(), 3), Math.pow(-rightX.getAsDouble(), 3));
+        drive.drive(Math.pow(-leftY.getAsDouble(), 3), Math.pow(leftX.getAsDouble(), 3), Math.pow(rightX.getAsDouble(), 3));
     }
 }

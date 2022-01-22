@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opModes.auto;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.commands.auto.AutoRoutine;
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 public class AutoOpMode extends CommandOpMode {
     private AutoRoutine autoRoutine;
 
-    private Motor intake, liftMotorL, liftMotorR;
+    private Motor intakeL, intakeR, liftMotorL, liftMotorR;
     private CRServo floor;
 
     private IntakeSubsystem intakeSubsystem;
@@ -26,14 +27,14 @@ public class AutoOpMode extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.intake = new Motor(hardwareMap, "intake");
+        this.intakeL = new Motor(hardwareMap, "intakeL");
         this.liftMotorL = new Motor(hardwareMap, "liftL");
         this.liftMotorR = new Motor(hardwareMap, "liftR");
 
         this.floor = new CRServo(hardwareMap, "floor");
 
         this.floorSubsystem = new FloorSubsystem(floor);
-        this.intakeSubsystem = new IntakeSubsystem(intake);
+        this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(intakeL));
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.armSubsystem = new LiftSubsystem(liftMotorL, liftMotorR);
 
