@@ -5,15 +5,6 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 
 public class SimpleFloorSubsystem extends SubsystemBase {
     private SimpleServo servo;
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     private boolean isActive;
 
     public SimpleFloorSubsystem(SimpleServo servo) {
@@ -25,8 +16,14 @@ public class SimpleFloorSubsystem extends SubsystemBase {
     }
 
     public void reset() {
-        servo.turnToAngle(0);
+        servo.turnToAngle(10);
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }

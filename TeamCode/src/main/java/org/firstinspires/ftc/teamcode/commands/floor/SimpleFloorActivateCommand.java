@@ -28,6 +28,5 @@ public class SimpleFloorActivateCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         subsystem.setActive(!subsystem.isActive());
-
     }
 }
