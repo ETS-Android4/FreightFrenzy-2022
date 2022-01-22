@@ -62,6 +62,7 @@ public class MainTeleOp extends CommandOpMode {
     public void initialize() {
         this.intakeL = new Motor(hardwareMap, "intakeL");
         this.intakeR = new Motor(hardwareMap, "intakeR");
+        intakeR.setInverted(true);
         this.armMotor = new Motor(hardwareMap, "arm");
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
