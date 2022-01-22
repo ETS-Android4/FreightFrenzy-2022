@@ -68,21 +68,21 @@ public class MainTeleOp extends CommandOpMode {
         this.limit = new RevTouchSensor(hardwareMap, "limit");
         this.time = new ElapsedTime();
 
-        this.floor = new CRServo(hardwareMap, "floor");
-        this.floorSimple = new SimpleServo(hardwareMap, "floor", 0, 180, AngleUnit.DEGREES);
+        //this.floor = new CRServo(hardwareMap, "floor");
+        //this.floorSimple = new SimpleServo(hardwareMap, "floor", 0, 180, AngleUnit.DEGREES);
 
         this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(this.intakeL, this.intakeR));
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
-        this.floorSubsystem = new FloorSubsystem(this.floor);
-        this.simpleFloorSubsystem = new SimpleFloorSubsystem(this.floorSimple);
+        //this.floorSubsystem = new FloorSubsystem(this.floor);
+        //this.simpleFloorSubsystem = new SimpleFloorSubsystem(this.floorSimple);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
         this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
         this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
-        this.floorActivateCommand = new FloorActivateCommand(this.floorSubsystem, this.time);
-        this.simpleActivateCommand = new SimpleFloorActivateCommand(this.simpleFloorSubsystem);
+        //this.floorActivateCommand = new FloorActivateCommand(this.floorSubsystem, this.time);
+        //this.simpleActivateCommand = new SimpleFloorActivateCommand(this.simpleFloorSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -94,8 +94,8 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.Y).whenPressed(this.simpleActivateCommand);
-        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
+//        operator.getGamepadButton(GamepadKeys.Button.Y).whenPressed(this.simpleActivateCommand);
+//        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(this.floorActivateCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.armExtendCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.armRetractCommand);
