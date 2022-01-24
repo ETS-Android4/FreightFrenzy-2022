@@ -37,8 +37,8 @@ public class ArmSubsystem extends SubsystemBase {
         return limitSwitch.isPressed();
     }
 
-    public void slightUp() {
-        armMotor.set(0.2);
+    public void slightUp(){
+            armMotor.set(0.2);
     }
 
     public void slightDown() {

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opModes;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
@@ -14,26 +15,25 @@ import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.floor.FloorCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 
 @TeleOp(name = "TeleOp")
 public class MainTeleOp extends CommandOpMode {
     private Servo floor;
+    private ElapsedTime time;
+    private RevTouchSensor limit;
 
     //motors
     private Motor armMotor, intakeL, intakeR, carousel;
-    private RevTouchSensor limit;
-    private ElapsedTime time;
 
     //subsystems
     private IntakeSubsystem intakeSubsystem;
@@ -47,7 +47,6 @@ public class MainTeleOp extends CommandOpMode {
     private ArmRetractTestCommand armRetractCommand;
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
-    private FloorCommand floorCommand;
     private MecanumDriveCommand mecanumDriveCommand;
     private CarouselRunCommand carouselCommand;
 
@@ -68,7 +67,6 @@ public class MainTeleOp extends CommandOpMode {
         this.time = new ElapsedTime();
 
         this.floor = hardwareMap.get(Servo.class, "floor");
-        floor.setDirection(Servo.Direction.REVERSE);
 
         this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(this.intakeL, this.intakeR));
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
@@ -80,7 +78,6 @@ public class MainTeleOp extends CommandOpMode {
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
         this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
         this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
-        this.floorCommand = new FloorCommand(this.floorSubsystem);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
 
         driver = new GamepadEx(gamepad1);
@@ -93,23 +90,20 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.A).whenPressed(new InstantCommand(this::move));
-        operator.getGamepadButton(GamepadKeys.Button.B).whenPressed(new InstantCommand(this::home));
+        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(new ConditionalCommand(
+                new InstantCommand(floorSubsystem::activate),
+                new InstantCommand(floorSubsystem::reset),
+                () -> {
+                    floorSubsystem.toggle();
+                    return floorSubsystem.isActive();
+                }));
 
         operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.armExtendCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.armRetractCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER ).whenHeld(this.carouselCommand);
+        operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
 
         register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
-    }
-
-    public void move(){
-        floor.setPosition(0.7);
-    }
-
-    public void home(){
-        floor.setPosition(0.1);
     }
 }

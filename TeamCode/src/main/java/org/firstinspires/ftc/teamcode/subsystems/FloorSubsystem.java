@@ -4,7 +4,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class FloorSubsystem extends SubsystemBase {
-    private Servo servo;
+    private final Servo servo;
     private boolean isActive;
 
     public FloorSubsystem(Servo servo) {
@@ -12,7 +12,7 @@ public class FloorSubsystem extends SubsystemBase {
     }
 
     public void activate() {
-        servo.setPosition(0.5);
+        servo.setPosition(0.8);
     }
 
     public void reset() {
@@ -23,7 +23,7 @@ public class FloorSubsystem extends SubsystemBase {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void toggle() {
+        isActive = !isActive;
     }
 }
