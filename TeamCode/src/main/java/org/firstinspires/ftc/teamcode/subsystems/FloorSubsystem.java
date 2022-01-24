@@ -1,24 +1,29 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.hardware.motors.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class FloorSubsystem extends SubsystemBase {
-    private final CRServo servo;
+    private Servo servo;
+    private boolean isActive;
 
-    public FloorSubsystem(CRServo servo) {
+    public FloorSubsystem(Servo servo) {
         this.servo = servo;
     }
 
     public void activate() {
-        servo.set(0.3);
+        servo.setPosition(0.5);
     }
 
     public void reset() {
-        servo.set(-0.3);
+        servo.setPosition(0.1);
     }
 
-    public void stop() {
-        servo.stopMotor();
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

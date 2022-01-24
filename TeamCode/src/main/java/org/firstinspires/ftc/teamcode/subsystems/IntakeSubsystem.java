@@ -9,6 +9,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem(MotorGroup intake) {
         this.intake = intake;
+        this.intake.setInverted(true);
     }
 
     public void in() {

@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.commands.floor;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
-import org.firstinspires.ftc.teamcode.subsystems.SimpleFloorSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 
-public class SimpleFloorActivateCommand extends CommandBase {
-    private SimpleFloorSubsystem subsystem;
+public class FloorCommand extends CommandBase {
+    private FloorSubsystem subsystem;
 
-    public SimpleFloorActivateCommand(SimpleFloorSubsystem subsystem) {
+    public FloorCommand(FloorSubsystem subsystem) {
         this.subsystem = subsystem;
     }
 

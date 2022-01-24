@@ -7,12 +7,11 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.command.WaitUntilCommand;
 
-import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 
 public class AutoRoutine extends SequentialCommandGroup {
-    public AutoRoutine(MecanumDriveSubsystem dt, FloorSubsystem floor, LiftSubsystem arm, CommandOpMode opMode) {
+    public AutoRoutine(MecanumDriveSubsystem dt, LiftSubsystem arm, CommandOpMode opMode) {
         addCommands(
                 new WaitUntilCommand(opMode::isStarted),
                 new InstantCommand(() -> arm.motorDown()),
