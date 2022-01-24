@@ -3,14 +3,15 @@ package org.firstinspires.ftc.teamcode.commands.arm;
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.LiftPIDSubsystem;
 
 public class ArmCommand extends CommandBase {
-    private final LiftPIDSubsystem subsystem;
-    private final Telemetry telemetry;
+    private final ArmPIDSubsystem subsystem;
+    private Telemetry telemetry;
     private int level;
 
-    public ArmCommand(LiftPIDSubsystem subsystem, Telemetry telemetry) {
+    public ArmCommand(ArmPIDSubsystem subsystem, Telemetry telemetry) {
         level = 0;
         this.subsystem = subsystem;
         this.telemetry = telemetry;
@@ -19,27 +20,16 @@ public class ArmCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (level == 0) {
-            subsystem.setMotorPosition(200);
-            subsystem.moveToPosition();
-            subsystem.setDesiredPosition(200);
-            level++;
-        } else if (level == 1) {
-            subsystem.setMotorPosition(250);
-            subsystem.moveToPosition();
-            subsystem.setDesiredPosition(250);
-            level++;
-        } else {
-            subsystem.setMotorPosition(300);
-            subsystem.moveToPosition();
-            subsystem.setDesiredPosition(300);
-            level = 0;
-        }
+        subsystem.setTargetPosition(1500);
+        subsystem.setMotorPosition(1500);
+        subsystem.moveToPosition();
+        telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
+        telemetry.update();
     }
 
     @Override
     public boolean isFinished() {
-        return subsystem.atPosition();
+        return subsystem.getCurrentPosition() == subsystem.getTargetPosition() || subsystem.getState();
     }
 
     @Override

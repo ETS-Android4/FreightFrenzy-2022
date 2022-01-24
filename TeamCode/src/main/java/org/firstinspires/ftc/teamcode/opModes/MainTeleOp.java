@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
@@ -38,7 +38,7 @@ public class MainTeleOp extends CommandOpMode {
     //subsystems
     private IntakeSubsystem intakeSubsystem;
     private ArmSubsystem armSubsystem;
-    private FloorSubsystem floorSubsystem;
+    private BoxSubsystem boxSubsystem;
     private MecanumDriveSubsystem mecanumDriveSubsystem;
     private CarouselSubsystem carouselSubsystem;
 
@@ -71,7 +71,7 @@ public class MainTeleOp extends CommandOpMode {
         this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(this.intakeL, this.intakeR));
         this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
-        this.floorSubsystem = new FloorSubsystem(this.floor);
+        this.boxSubsystem = new BoxSubsystem(this.floor);
         this.carouselSubsystem = new CarouselSubsystem(this.carousel);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
@@ -91,11 +91,11 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(new ConditionalCommand(
-                new InstantCommand(floorSubsystem::activate),
-                new InstantCommand(floorSubsystem::reset),
+                new InstantCommand(boxSubsystem::activate),
+                new InstantCommand(boxSubsystem::reset),
                 () -> {
-                    floorSubsystem.toggle();
-                    return floorSubsystem.isActive();
+                    boxSubsystem.toggle();
+                    return boxSubsystem.isActive();
                 }));
 
         operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.armExtendCommand);

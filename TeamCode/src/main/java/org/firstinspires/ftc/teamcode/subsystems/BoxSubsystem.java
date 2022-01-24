@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class FloorSubsystem extends SubsystemBase {
+//TODO Rename from floor to box
+public class BoxSubsystem extends SubsystemBase {
     private final Servo servo;
     private boolean isActive;
 
-    public FloorSubsystem(Servo servo) {
+    public BoxSubsystem(Servo servo) {
         this.servo = servo;
     }
 

@@ -6,9 +6,9 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.commands.arm.ArmDownCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmSlightCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmUpCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.time.ArmDownCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.time.ArmSlightCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.time.ArmUpCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 

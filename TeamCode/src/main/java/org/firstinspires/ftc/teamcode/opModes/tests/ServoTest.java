@@ -8,20 +8,19 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.subsystems.FloorSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
 
 @TeleOp
 public class ServoTest extends CommandOpMode {
     private Servo servo;
-    private FloorSubsystem subsystem;
+    private BoxSubsystem subsystem;
     private GamepadEx driver;
 
     @Override
     public void initialize() {
-//        this.servo = new SimpleServo(hardwareMap, "servo", 0, 360, AngleUnit.DEGREES);
         this.servo = hardwareMap.get(Servo.class, "servo");
 
-        this.subsystem = new FloorSubsystem(servo);
+        this.subsystem = new BoxSubsystem(servo);
 
         driver = new GamepadEx(gamepad1);
         driver.getGamepadButton(GamepadKeys.Button.X)

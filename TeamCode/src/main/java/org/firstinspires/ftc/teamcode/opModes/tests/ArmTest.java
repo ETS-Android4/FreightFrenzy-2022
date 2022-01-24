@@ -30,7 +30,7 @@ public class ArmTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.armMotor = new Motor(hardwareMap, "arm");
+        this.armMotor = new Motor(hardwareMap, "arm", Motor.GoBILDA.RPM_435);
 
         this.limit = new RevTouchSensor(hardwareMap, "limit");
 
