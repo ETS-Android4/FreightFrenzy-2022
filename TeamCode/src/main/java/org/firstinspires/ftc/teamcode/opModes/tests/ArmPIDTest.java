@@ -36,7 +36,7 @@ public class ArmPIDTest extends CommandOpMode {
         this.limit = new RevTouchSensor(hardwareMap, "limit");
         this.armSubsystem = new ArmPIDSubsystem(armMotor, limit);
 
-        this.command = new ArmCommand(armSubsystem, telemetry);
+        this.command = new ArmCommand(armSubsystem);
         this.driver = new GamepadEx(gamepad1);
 
         driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(command);

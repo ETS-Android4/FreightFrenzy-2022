@@ -11,6 +11,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.commands.arm.ArmBoxCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
@@ -18,6 +21,7 @@ import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
@@ -37,18 +41,19 @@ public class MainTeleOp extends CommandOpMode {
 
     //subsystems
     private IntakeSubsystem intakeSubsystem;
-    private ArmSubsystem armSubsystem;
+    private ArmPIDSubsystem armSubsystem;
     private BoxSubsystem boxSubsystem;
     private MecanumDriveSubsystem mecanumDriveSubsystem;
     private CarouselSubsystem carouselSubsystem;
 
     //commands
-    private ArmExtendTestCommand armExtendCommand;
-    private ArmRetractTestCommand armRetractCommand;
+    private ArmCommand armCommand;
+    private ArmResetCommand armResetCommand;
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
     private MecanumDriveCommand mecanumDriveCommand;
     private CarouselRunCommand carouselCommand;
+    private ArmBoxCommand armBoxCommand;
 
     //gamepads
     private GamepadEx driver;
@@ -69,16 +74,17 @@ public class MainTeleOp extends CommandOpMode {
         this.floor = hardwareMap.get(Servo.class, "floor");
 
         this.intakeSubsystem = new IntakeSubsystem(new MotorGroup(this.intakeL, this.intakeR));
-        this.armSubsystem = new ArmSubsystem(this.armMotor, this.limit);
+        this.armSubsystem = new ArmPIDSubsystem(this.armMotor, this.limit);
         this.mecanumDriveSubsystem = new MecanumDriveSubsystem(new SampleMecanumDrive(hardwareMap), false);
         this.boxSubsystem = new BoxSubsystem(this.floor);
         this.carouselSubsystem = new CarouselSubsystem(this.carousel);
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
-        this.armExtendCommand = new ArmExtendTestCommand(this.armSubsystem);
-        this.armRetractCommand = new ArmRetractTestCommand(this.armSubsystem);
+        this.armCommand = new ArmCommand(this.armSubsystem);
+        this.armResetCommand = new ArmResetCommand(this.armSubsystem);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
+//        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -97,9 +103,8 @@ public class MainTeleOp extends CommandOpMode {
                     boxSubsystem.toggle();
                     return boxSubsystem.isActive();
                 }));
-
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(this.armExtendCommand);
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(this.armRetractCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armResetCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
 

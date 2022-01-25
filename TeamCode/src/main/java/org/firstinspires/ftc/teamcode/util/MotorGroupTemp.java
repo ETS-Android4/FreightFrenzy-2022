@@ -191,7 +191,7 @@ public class MotorGroupTemp extends Motor implements Iterable<Motor> {
      */
     @Override
     public String getDeviceType() {
-        return "Motor Group";
+        return "MotorPDController Group";
     }
 
     /**

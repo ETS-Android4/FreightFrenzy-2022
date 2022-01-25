@@ -56,7 +56,7 @@ public class MotorDirectionDebugger extends LinearOpMode {
         while (!isStopRequested()) {
             telemetry.addLine("Press each button to turn on its respective motor");
             telemetry.addLine();
-            telemetry.addLine("<font face=\"monospace\">Xbox/PS4 Button - Motor</font>");
+            telemetry.addLine("<font face=\"monospace\">Xbox/PS4 Button - MotorPDController</font>");
             telemetry.addLine("<font face=\"monospace\">&nbsp;&nbsp;X / ▢&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front Left</font>");
             telemetry.addLine("<font face=\"monospace\">&nbsp;&nbsp;Y / Δ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front Right</font>");
             telemetry.addLine("<font face=\"monospace\">&nbsp;&nbsp;B / O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Rear&nbsp;&nbsp;Right</font>");
@@ -65,19 +65,19 @@ public class MotorDirectionDebugger extends LinearOpMode {
 
             if (gamepad1.x) {
                 drive.setMotorPowers(MOTOR_POWER, 0, 0, 0);
-                telemetry.addLine("Running Motor: Front Left");
+                telemetry.addLine("Running MotorPDController: Front Left");
             } else if (gamepad1.y) {
                 drive.setMotorPowers(0, 0, 0, MOTOR_POWER);
-                telemetry.addLine("Running Motor: Front Right");
+                telemetry.addLine("Running MotorPDController: Front Right");
             } else if (gamepad1.b) {
                 drive.setMotorPowers(0, 0, MOTOR_POWER, 0);
-                telemetry.addLine("Running Motor: Rear Right");
+                telemetry.addLine("Running MotorPDController: Rear Right");
             } else if (gamepad1.a) {
                 drive.setMotorPowers(0, MOTOR_POWER, 0, 0);
-                telemetry.addLine("Running Motor: Rear Left");
+                telemetry.addLine("Running MotorPDController: Rear Left");
             } else {
                 drive.setMotorPowers(0, 0, 0, 0);
-                telemetry.addLine("Running Motor: None");
+                telemetry.addLine("Running MotorPDController: None");
             }
 
             telemetry.update();

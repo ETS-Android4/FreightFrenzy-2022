@@ -292,7 +292,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         // TODO: This must be changed to match your configuration
         //                           | Z axis
         //                           |
-        //     (Motor Port Side)     |   / X axis
+        //     (MotorPDController Port Side)     |   / X axis
         //                       ____|__/____
         //          Y axis     / *   | /    /|   (IO Side)
         //          _________ /______|/    //      I2C
