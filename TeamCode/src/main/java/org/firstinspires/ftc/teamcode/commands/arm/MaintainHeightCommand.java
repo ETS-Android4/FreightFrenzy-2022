@@ -3,13 +3,14 @@ package org.firstinspires.ftc.teamcode.commands.arm;
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.LiftPIDSubsystem;
 
 public class MaintainHeightCommand extends CommandBase {
-    private final LiftPIDSubsystem subsystem;
+    private final ArmPIDSubsystem subsystem;
     private final Telemetry telemetry;
 
-    public MaintainHeightCommand(LiftPIDSubsystem subsystem, Telemetry telemetry) {
+    public MaintainHeightCommand(ArmPIDSubsystem subsystem, Telemetry telemetry) {
         this.subsystem = subsystem;
         this.telemetry = telemetry;
         addRequirements(subsystem);
@@ -17,13 +18,10 @@ public class MaintainHeightCommand extends CommandBase {
 
     @Override
     public void execute() {
-        subsystem.setMotorPosition(subsystem.getDesiredPosition());
-        while (!subsystem.atPosition()) {
+        subsystem.setMotorPosition(subsystem.getTargetPosition());
+        while (!(subsystem.getCurrentPosition() == subsystem.getTargetPosition())) {
             subsystem.moveToPosition();
-            telemetry.addData("Current Position: ", subsystem.currentPosition());
         }
-        telemetry.addData("At Position: ", subsystem.atPosition());
-        telemetry.update();
         subsystem.stopMotor();
     }
 }

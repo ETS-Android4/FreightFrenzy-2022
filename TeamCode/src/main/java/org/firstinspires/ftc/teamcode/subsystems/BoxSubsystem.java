@@ -19,6 +19,10 @@ public class BoxSubsystem extends SubsystemBase {
         servo.setPosition(0.1);
     }
 
+    public void movePos(){
+        servo.setPosition(0.3);
+    }
+
     public boolean isActive() {
         return isActive;
     }

@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
+import org.firstinspires.ftc.teamcode.commands.box.BoxNormalCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
@@ -55,6 +56,7 @@ public class MainTeleOp extends CommandOpMode {
     private OuttakeCommand outtakeCommand;
     private MecanumDriveCommand mecanumDriveCommand;
     private CarouselRunCommand carouselCommand;
+    private BoxNormalCommand boxNormalCommand;
     private ArmBoxCommand armBoxCommand;
 
     //gamepads
@@ -87,11 +89,12 @@ public class MainTeleOp extends CommandOpMode {
         this.armResetCommand = new ArmResetCommand(this.armSubsystem);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
 //        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
+        this.boxNormalCommand = new BoxNormalCommand(this.boxSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
 
-        this.mecanumDriveCommand = new MecanumDriveCommand(this.mecanumDriveSubsystem, () -> driver.getLeftY(),
+        this.mecanumDriveCommand = new MecanumDriveCommand(this.mecanumDriveSubsystem, driver::getLeftY,
                 driver::getLeftX, driver::getRightX
         );
 
@@ -110,7 +113,8 @@ public class MainTeleOp extends CommandOpMode {
 
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
 
-        register(this.mecanumDriveSubsystem);
+        register(this.mecanumDriveSubsystem, this.boxSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
+        this.boxSubsystem.setDefaultCommand(this.boxNormalCommand);
     }
 }

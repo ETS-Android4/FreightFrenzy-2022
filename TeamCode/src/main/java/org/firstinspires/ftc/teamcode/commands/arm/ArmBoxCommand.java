@@ -17,8 +17,7 @@ public class ArmBoxCommand extends SequentialCommandGroup {
 
         addCommands(
             this.armCommand,
-            new InstantCommand(box::activate),
-            new InstantCommand(box::reset),
+
             this.armResetCommand
         );
     }

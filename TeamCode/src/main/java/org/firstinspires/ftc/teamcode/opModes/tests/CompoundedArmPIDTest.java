@@ -4,43 +4,44 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.MaintainHeightCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.LiftPIDSubsystem;
 import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
-@TeleOp(group = "tests")
-public class ArmPIDTest extends CommandOpMode {
+public class CompoundedArmPIDTest extends CommandOpMode {
     private RevTouchSensor limit;
-    private int level = 0;
 
     //motors
     private MotorPDController armMotor;
 
     //subsystems
-    private ArmPIDSubsystem armSubsystem;
+    private ArmPIDSubsystem subsystem;
 
     //commands
-    private ArmCommand command;
+    private MaintainHeightCommand command;
 
     //gamepads
     private GamepadEx driver;
 
     @Override
     public void initialize() {
-        this.armMotor = new MotorPDController(hardwareMap, "arm");
+        this.armMotor = new MotorPDController(hardwareMap, "armMotor");
         this.limit = new RevTouchSensor(hardwareMap, "limit");
-        this.armSubsystem = new ArmPIDSubsystem(armMotor, limit);
+        this.subsystem = new ArmPIDSubsystem(armMotor, limit);
+        this.command = new MaintainHeightCommand(subsystem, telemetry);
 
-        this.command = new ArmCommand(armSubsystem);
         this.driver = new GamepadEx(gamepad1);
 
-        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(command);
+        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(new InstantCommand(() ->
+                subsystem.setTargetPosition(1500)
+        ));
+        driver.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(new InstantCommand(() ->
+                subsystem.setTargetPosition(0)
+        ));
 
+        register(this.subsystem);
+        subsystem.setDefaultCommand(command);
     }
 }
