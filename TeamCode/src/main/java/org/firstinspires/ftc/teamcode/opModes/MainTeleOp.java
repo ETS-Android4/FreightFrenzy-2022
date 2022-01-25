@@ -27,6 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
+import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 
@@ -37,7 +38,8 @@ public class MainTeleOp extends CommandOpMode {
     private RevTouchSensor limit;
 
     //motors
-    private Motor armMotor, intakeL, intakeR, carousel;
+    private Motor intakeL, intakeR, carousel;
+    private MotorPDController armMotor;
 
     //subsystems
     private IntakeSubsystem intakeSubsystem;
@@ -64,7 +66,7 @@ public class MainTeleOp extends CommandOpMode {
     public void initialize() {
         this.intakeL = new Motor(hardwareMap, "intakeL");
         this.intakeR = new Motor(hardwareMap, "intakeR");
-        this.armMotor = new Motor(hardwareMap, "arm");
+        this.armMotor = new MotorPDController(hardwareMap, "arm");
         this.carousel = new Motor(hardwareMap, "carousel");
         intakeR.setInverted(true);
 
