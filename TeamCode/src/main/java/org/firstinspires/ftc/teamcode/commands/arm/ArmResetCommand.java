@@ -7,12 +7,14 @@ import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 
 public class ArmResetCommand extends CommandBase {
     private final ArmPIDSubsystem subsystem;
+    private Telemetry telemetry;
     private int level;
 
-    public ArmResetCommand(ArmPIDSubsystem subsystem) {
+    public ArmResetCommand(ArmPIDSubsystem subsystem, Telemetry telemetry) {
         level = 0;
         this.subsystem = subsystem;
-       addRequirements(subsystem);
+        this.telemetry = telemetry;
+        addRequirements(subsystem);
     }
 
     @Override
@@ -20,6 +22,8 @@ public class ArmResetCommand extends CommandBase {
         subsystem.setTargetPosition(0);
         subsystem.setMotorPosition(0);
         subsystem.moveToPosition();
+        telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
+        telemetry.update();
     }
 
     @Override

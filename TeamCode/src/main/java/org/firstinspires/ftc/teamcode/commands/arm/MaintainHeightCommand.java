@@ -21,6 +21,9 @@ public class MaintainHeightCommand extends CommandBase {
         subsystem.setMotorPosition(subsystem.getTargetPosition());
         while (!(subsystem.getCurrentPosition() == subsystem.getTargetPosition())) {
             subsystem.moveToPosition();
+            telemetry.addData("Target Position: ", subsystem.getTargetPosition());
+            telemetry.addData("Encoder Position: ", subsystem.getCurrentPosition());
+            telemetry.update();
         }
         subsystem.stopMotor();
     }

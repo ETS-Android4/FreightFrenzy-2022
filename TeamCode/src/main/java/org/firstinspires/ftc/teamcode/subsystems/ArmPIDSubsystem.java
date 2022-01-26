@@ -16,18 +16,18 @@ public class ArmPIDSubsystem extends SubsystemBase {
     public ArmPIDSubsystem(MotorPDController armMotor, RevTouchSensor limit) {
         this.armMotor = armMotor;
         this.limitSwitch = limit;
+        armMotor.setInverted(true);
         armMotor.setRunMode(MotorPDController.RunMode.PositionControl);
         armMotor.encoder.reset();
         armMotor.encoder.setDirection(MotorPDController.Direction.REVERSE);
-        armMotor.setInverted(true);
         armMotor.setZeroPowerBehavior(MotorPDController.ZeroPowerBehavior.BRAKE);
     }
 
     public void setMotorPosition(int position){
         armMotor.setRunMode(MotorPDController.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
-        armMotor.setPositionCoefficient(10);
-        armMotor.setPositionDerivativeCoefficient(1);
+        armMotor.setPositionCoefficient(3);
+        armMotor.setPositionDerivativeCoefficient(1.5);
         armMotor.setPositionTolerance(2);
     }
 

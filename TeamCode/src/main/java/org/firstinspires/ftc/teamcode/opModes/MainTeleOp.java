@@ -85,8 +85,8 @@ public class MainTeleOp extends CommandOpMode {
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
-        this.armCommand = new ArmCommand(this.armSubsystem);
-        this.armResetCommand = new ArmResetCommand(this.armSubsystem);
+        this.armCommand = new ArmCommand(this.armSubsystem, telemetry);
+        this.armResetCommand = new ArmResetCommand(this.armSubsystem, telemetry);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
 //        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
         this.boxNormalCommand = new BoxNormalCommand(this.boxSubsystem);

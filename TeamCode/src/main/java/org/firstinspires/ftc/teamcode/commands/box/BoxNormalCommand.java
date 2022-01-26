@@ -9,6 +9,8 @@ public class BoxNormalCommand extends CommandBase {
 
     public BoxNormalCommand(BoxSubsystem subsystem) {
         this.subsystem = subsystem;
+
+        addRequirements(this.subsystem);
     }
 
     @Override
