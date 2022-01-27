@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmBoxCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
+import org.firstinspires.ftc.teamcode.commands.auto.blue.AutoEverythingBlueAlliance;
 import org.firstinspires.ftc.teamcode.commands.auto.red.AutoEverythingRedAlliance;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
@@ -17,8 +18,8 @@ import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
-@Autonomous(name = "Auto Red Full")
-public class AutoOpModeRedEverything extends CommandOpMode {
+@Autonomous
+public class AutoOpModeBlueEverything extends CommandOpMode {
     private Servo box;
     private RevTouchSensor limit;
 
@@ -35,7 +36,7 @@ public class AutoOpModeRedEverything extends CommandOpMode {
     //commands
     private ArmBoxCommand armCommand;
     private ArmResetCommand armResetCommand;
-    private AutoEverythingRedAlliance autoCommand;
+    private AutoEverythingBlueAlliance autoCommand;
 
     @Override
     public void initialize() {
@@ -51,8 +52,8 @@ public class AutoOpModeRedEverything extends CommandOpMode {
 
         this.armCommand = new ArmBoxCommand(new ArmCommand(armSubsystem, telemetry), new ArmResetCommand(armSubsystem, telemetry), boxSubsystem);
         this.armResetCommand = new ArmResetCommand(armSubsystem, telemetry);
-        this.autoCommand = new AutoEverythingRedAlliance(driveSubsystem, carouselSubsystem, armResetCommand,
-                armCommand, boxSubsystem, this);
+        this.autoCommand = new AutoEverythingBlueAlliance(driveSubsystem, carouselSubsystem, armResetCommand,
+                armCommand, boxSubsystem,this);
 
         schedule(autoCommand);
     }
