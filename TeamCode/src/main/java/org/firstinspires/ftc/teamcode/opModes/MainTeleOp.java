@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.commands.arm.ArmBoxCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.ArmResetBoxCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
@@ -46,8 +47,7 @@ public class MainTeleOp extends CommandOpMode {
     private CarouselSubsystem carouselSubsystem;
 
     //commands
-    private ArmCommand armCommand;
-    private ArmResetCommand armResetCommand;
+    private ArmResetBoxCommand armResetCommand;
     private IntakeCommand intakeCommand;
     private OuttakeCommand outtakeCommand;
     private MecanumDriveCommand mecanumDriveCommand;
@@ -80,10 +80,10 @@ public class MainTeleOp extends CommandOpMode {
 
         this.intakeCommand = new IntakeCommand(this.intakeSubsystem);
         this.outtakeCommand = new OuttakeCommand(this.intakeSubsystem);
-        this.armCommand = new ArmCommand(this.armSubsystem, telemetry);
-        this.armResetCommand = new ArmResetCommand(this.armSubsystem, telemetry);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
-        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
+        this.armBoxCommand = new ArmBoxCommand(new ArmCommand(this.armSubsystem, telemetry),
+                new ArmResetCommand(this.armSubsystem, telemetry), this.boxSubsystem);
+        this.armResetCommand = new ArmResetBoxCommand(new ArmResetCommand(this.armSubsystem, telemetry), this.boxSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -95,13 +95,7 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.intakeCommand);
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
-        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(new ConditionalCommand(
-                new InstantCommand(boxSubsystem::activate),
-                new InstantCommand(boxSubsystem::reset),
-                () -> {
-                    boxSubsystem.toggle();
-                    return boxSubsystem.isActive();
-                }));
+        operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(new InstantCommand(boxSubsystem::activate));
         operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armBoxCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armResetCommand);
 
