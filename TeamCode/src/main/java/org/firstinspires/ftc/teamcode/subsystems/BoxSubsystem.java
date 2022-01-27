@@ -9,6 +9,7 @@ public class BoxSubsystem extends SubsystemBase {
 
     public BoxSubsystem(Servo servo) {
         this.servo = servo;
+        reset();
     }
 
     public void activate() {
@@ -16,7 +17,7 @@ public class BoxSubsystem extends SubsystemBase {
     }
 
     public void reset() {
-        servo.setPosition(0.1);
+        servo.setPosition(0);
     }
 
     public void movePos(){

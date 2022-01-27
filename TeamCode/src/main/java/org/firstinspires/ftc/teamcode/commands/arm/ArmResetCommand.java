@@ -19,16 +19,14 @@ public class ArmResetCommand extends CommandBase {
 
     @Override
     public void execute() {
-        subsystem.setTargetPosition(0);
-        subsystem.setMotorPosition(0);
-        subsystem.moveToPosition();
+        subsystem.armResetPosition();
         telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
         telemetry.update();
     }
 
     @Override
     public boolean isFinished() {
-        return subsystem.getCurrentPosition() == subsystem.getTargetPosition() || subsystem.getState();
+        return subsystem.getState();
     }
 
     @Override

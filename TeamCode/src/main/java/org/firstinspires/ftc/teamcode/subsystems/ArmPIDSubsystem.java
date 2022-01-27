@@ -26,13 +26,18 @@ public class ArmPIDSubsystem extends SubsystemBase {
     public void setMotorPosition(int position){
         armMotor.setRunMode(MotorPDController.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
-        armMotor.setPositionCoefficient(3);
-        armMotor.setPositionDerivativeCoefficient(1.5);
-        armMotor.setPositionTolerance(2);
+        armMotor.setPositionCoefficient(3.5);
+        armMotor.setPositionDerivativeCoefficient(1);
+        armMotor.setPositionTolerance(0);
+    }
+
+    public void armResetPosition(){
+        armMotor.setRunMode(MotorPDController.RunMode.RawPower);
+        armMotor.set(-1.0);
     }
 
     public void moveToPosition(){
-        armMotor.set(0.5);
+        armMotor.set(0.3);
     }
 
     public int getCurrentPosition() {

@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.commands.arm;
 
-import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
-import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
 
 public class ArmBoxCommand extends SequentialCommandGroup {
@@ -16,9 +14,8 @@ public class ArmBoxCommand extends SequentialCommandGroup {
         this.armResetCommand = resetCommand;
 
         addCommands(
-            this.armCommand,
-
-            this.armResetCommand
+            new InstantCommand(box::movePos),
+            this.armCommand
         );
     }
 }

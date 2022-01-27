@@ -14,18 +14,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmBoxCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
-import org.firstinspires.ftc.teamcode.commands.box.BoxNormalCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.OuttakeCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.util.MotorPDController;
@@ -56,7 +52,6 @@ public class MainTeleOp extends CommandOpMode {
     private OuttakeCommand outtakeCommand;
     private MecanumDriveCommand mecanumDriveCommand;
     private CarouselRunCommand carouselCommand;
-    private BoxNormalCommand boxNormalCommand;
     private ArmBoxCommand armBoxCommand;
 
     //gamepads
@@ -68,7 +63,7 @@ public class MainTeleOp extends CommandOpMode {
     public void initialize() {
         this.intakeL = new Motor(hardwareMap, "intakeL");
         this.intakeR = new Motor(hardwareMap, "intakeR");
-        this.armMotor = new MotorPDController(hardwareMap, "arm");
+        this.armMotor = new MotorPDController(hardwareMap, "arm", MotorPDController.GoBILDA.RPM_435);
         this.carousel = new Motor(hardwareMap, "carousel");
         intakeR.setInverted(true);
 
@@ -88,8 +83,7 @@ public class MainTeleOp extends CommandOpMode {
         this.armCommand = new ArmCommand(this.armSubsystem, telemetry);
         this.armResetCommand = new ArmResetCommand(this.armSubsystem, telemetry);
         this.carouselCommand = new CarouselRunCommand(this.carouselSubsystem);
-//        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
-        this.boxNormalCommand = new BoxNormalCommand(this.boxSubsystem);
+        this.armBoxCommand = new ArmBoxCommand(this.armCommand, this.armResetCommand, this.boxSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -108,13 +102,12 @@ public class MainTeleOp extends CommandOpMode {
                     boxSubsystem.toggle();
                     return boxSubsystem.isActive();
                 }));
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armBoxCommand);
         operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armResetCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
 
-        register(this.mecanumDriveSubsystem, this.boxSubsystem);
+        register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
-        this.boxSubsystem.setDefaultCommand(this.boxNormalCommand);
     }
 }
