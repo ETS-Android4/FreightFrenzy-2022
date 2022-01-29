@@ -5,17 +5,15 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.commands.arm.ArmBoxCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.ArmResetCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.PID.groups.ArmBoxCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.PID.ArmCommand;
+import org.firstinspires.ftc.teamcode.commands.arm.PID.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.commands.auto.blue.AutoEverythingBlueAlliance;
-import org.firstinspires.ftc.teamcode.commands.auto.red.AutoEverythingRedAlliance;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
-import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 @Autonomous
@@ -24,8 +22,7 @@ public class AutoOpModeBlueEverything extends CommandOpMode {
     private RevTouchSensor limit;
 
     //motors
-    private Motor carousel;
-    private MotorPDController arm;
+    private Motor carousel, arm;
 
     //subsystems
     private ArmPIDSubsystem armSubsystem;
@@ -40,7 +37,7 @@ public class AutoOpModeBlueEverything extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.arm = new MotorPDController(hardwareMap, "arm");
+        this.arm = new Motor(hardwareMap, "arm");
         this.carousel = new Motor(hardwareMap, "carousel");
         this.box = hardwareMap.get(Servo.class, "floor");
         this.limit = new RevTouchSensor(hardwareMap, "limit");

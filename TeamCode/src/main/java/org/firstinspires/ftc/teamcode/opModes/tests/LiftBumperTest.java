@@ -6,8 +6,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.arm.test.LiftDropTestCommand;
-import org.firstinspires.ftc.teamcode.commands.arm.test.LiftRaiseTestCommand;
+import org.firstinspires.ftc.teamcode.commands.wrist.LiftDropTestCommand;
+import org.firstinspires.ftc.teamcode.commands.wrist.LiftRaiseTestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 
 @TeleOp(group = "tests")

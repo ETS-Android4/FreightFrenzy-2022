@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.commands.arm;
+package org.firstinspires.ftc.teamcode.commands.arm.PID;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
@@ -19,14 +19,16 @@ public class ArmResetCommand extends CommandBase {
 
     @Override
     public void execute() {
-        subsystem.armResetPosition();
+        subsystem.setTargetPosition(0);
+        subsystem.setMotorPosition(0);
+        subsystem.moveToPosition();
         telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
         telemetry.update();
     }
 
     @Override
     public boolean isFinished() {
-        return subsystem.getState();
+        return subsystem.getCurrentPosition() == subsystem.getCurrentPosition() && subsystem.getState();
     }
 
     @Override

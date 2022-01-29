@@ -4,11 +4,11 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.arm.MaintainHeightCommand;
+import org.firstinspires.ftc.teamcode.commands.wrist.MaintainHeightCommand;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
-import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 @TeleOp
@@ -16,7 +16,7 @@ public class CompoundedArmPIDTest extends CommandOpMode {
     private RevTouchSensor limit;
 
     //motors
-    private MotorPDController armMotor;
+    private Motor armMotor;
 
     //subsystems
     private ArmPIDSubsystem subsystem;
@@ -29,7 +29,7 @@ public class CompoundedArmPIDTest extends CommandOpMode {
 
     @Override
     public void initialize() {
-        this.armMotor = new MotorPDController(hardwareMap, "arm");
+        this.armMotor = new Motor(hardwareMap, "arm");
         this.limit = new RevTouchSensor(hardwareMap, "limit");
         this.subsystem = new ArmPIDSubsystem(armMotor, limit);
         this.command = new MaintainHeightCommand(subsystem, telemetry);

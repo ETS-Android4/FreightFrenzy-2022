@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.commands.arm;
+package org.firstinspires.ftc.teamcode.commands.wrist;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.util.ElapsedTime;

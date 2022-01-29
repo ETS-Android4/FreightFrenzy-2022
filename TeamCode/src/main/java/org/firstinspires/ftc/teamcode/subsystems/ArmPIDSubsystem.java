@@ -8,32 +8,25 @@ import org.firstinspires.ftc.teamcode.util.MotorPDController;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
 public class ArmPIDSubsystem extends SubsystemBase {
-    private MotorPDController armMotor;
+    private Motor armMotor;
     private RevTouchSensor limitSwitch;
 
     private int targetPosition;
 
-    public ArmPIDSubsystem(MotorPDController armMotor, RevTouchSensor limit) {
+    public ArmPIDSubsystem(Motor armMotor, RevTouchSensor limit) {
         this.armMotor = armMotor;
         this.limitSwitch = limit;
         armMotor.setInverted(true);
-        armMotor.setRunMode(MotorPDController.RunMode.PositionControl);
+        armMotor.setRunMode(Motor.RunMode.PositionControl);
         armMotor.encoder.reset();
-        armMotor.encoder.setDirection(MotorPDController.Direction.REVERSE);
-        armMotor.setZeroPowerBehavior(MotorPDController.ZeroPowerBehavior.BRAKE);
+        armMotor.encoder.setDirection(Motor.Direction.REVERSE);
+        armMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setMotorPosition(int position){
-        armMotor.setRunMode(MotorPDController.RunMode.PositionControl);
         armMotor.setTargetPosition(position);
         armMotor.setPositionCoefficient(3.5);
-        armMotor.setPositionDerivativeCoefficient(1);
         armMotor.setPositionTolerance(0);
-    }
-
-    public void armResetPosition(){
-        armMotor.setRunMode(MotorPDController.RunMode.RawPower);
-        armMotor.set(-1.0);
     }
 
     public void moveToPosition(){

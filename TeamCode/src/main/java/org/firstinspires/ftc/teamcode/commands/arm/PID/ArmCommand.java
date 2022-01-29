@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.commands.arm;
+package org.firstinspires.ftc.teamcode.commands.arm.PID;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
@@ -20,8 +20,8 @@ public class ArmCommand extends CommandBase {
 
     @Override
     public void execute() {
-        subsystem.setTargetPosition(1500);
-        subsystem.setMotorPosition(1500);
+        subsystem.setTargetPosition(-2500);
+        subsystem.setMotorPosition(-2500);
         subsystem.moveToPosition();
         telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
         telemetry.update();
