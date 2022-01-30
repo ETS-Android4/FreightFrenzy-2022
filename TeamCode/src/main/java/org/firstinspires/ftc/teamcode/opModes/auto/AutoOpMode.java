@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.hardware.motors.CRServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.commands.auto.AutoRoutine;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 
 @Autonomous
+@Disabled
 public class AutoOpMode extends CommandOpMode {
     private AutoRoutine autoRoutine;
 
