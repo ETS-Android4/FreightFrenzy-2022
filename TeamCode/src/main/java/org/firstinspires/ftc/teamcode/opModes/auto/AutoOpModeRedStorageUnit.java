@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.opModes.auto;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.commands.arm.PID.groups.ArmBoxCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.PID.ArmCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.PID.ArmResetCommand;
-import org.firstinspires.ftc.teamcode.commands.auto.red.AutoEverythingRedAlliance;
+import org.firstinspires.ftc.teamcode.commands.arm.PID.groups.ArmBoxCommand;
+import org.firstinspires.ftc.teamcode.commands.auto.blue.AutoCarouselStorageUnitBlueAlliance;
+import org.firstinspires.ftc.teamcode.commands.auto.red.AutoCarouselStorageUnitRedAlliance;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.ArmPIDSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.BoxSubsystem;
@@ -17,9 +17,8 @@ import org.firstinspires.ftc.teamcode.subsystems.CarouselSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.util.RevTouchSensor;
 
-@Autonomous(name = "Auto Red Full")
-@Disabled
-public class AutoOpModeRedEverything extends CommandOpMode {
+@Autonomous(name = "Auto Red Storage")
+public class AutoOpModeRedStorageUnit extends CommandOpMode {
     private Servo box;
     private RevTouchSensor limit;
 
@@ -35,7 +34,7 @@ public class AutoOpModeRedEverything extends CommandOpMode {
     //commands
     private ArmBoxCommand armCommand;
     private ArmResetCommand armResetCommand;
-    private AutoEverythingRedAlliance autoCommand;
+    private AutoCarouselStorageUnitRedAlliance autoCommand;
 
     @Override
     public void initialize() {
@@ -51,8 +50,8 @@ public class AutoOpModeRedEverything extends CommandOpMode {
 
         this.armCommand = new ArmBoxCommand(new ArmCommand(armSubsystem, telemetry), new ArmResetCommand(armSubsystem, telemetry), boxSubsystem);
         this.armResetCommand = new ArmResetCommand(armSubsystem, telemetry);
-        this.autoCommand = new AutoEverythingRedAlliance(driveSubsystem, carouselSubsystem, armResetCommand,
-                armCommand, boxSubsystem, this);
+        this.autoCommand = new AutoCarouselStorageUnitRedAlliance(driveSubsystem, carouselSubsystem, armResetCommand,
+                armCommand, boxSubsystem,this);
 
         schedule(autoCommand);
     }
