@@ -90,8 +90,8 @@ public class MainTeleOp extends CommandOpMode {
         this.armBoxCommand = new ArmBoxCommand(new ArmCommand(this.armPIDSubsystem, telemetry),
                 new ArmResetCommand(this.armPIDSubsystem, telemetry), this.boxSubsystem);
         this.armResetCommand = new ArmResetBoxCommand(new ArmResetCommand(this.armPIDSubsystem, telemetry), this.boxSubsystem);
-        this.armRetractCommand = new ArmBoxRetractCommand(new ArmRetractTestCommand(this.armSubsystem), this.boxSubsystem);
-        this.armExtendCommand = new ArmBoxExtendCommand(new ArmExtendTestCommand(this.armSubsystem), this.boxSubsystem);
+//        this.armRetractCommand = new ArmBoxRetractCommand(new ArmRetractTestCommand(this.armSubsystem), this.boxSubsystem);
+//        this.armExtendCommand = new ArmBoxExtendCommand(new ArmExtendTestCommand(this.armSubsystem), this.boxSubsystem);
 
         driver = new GamepadEx(gamepad1);
         operator = new GamepadEx(gamepad2);
@@ -104,8 +104,8 @@ public class MainTeleOp extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.outtakeCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.X).whenPressed(new InstantCommand(boxSubsystem::activate));
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armExtendCommand);
-        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armRetractCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armBoxCommand);
+        operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armResetCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
 

@@ -14,13 +14,15 @@ public class ArmResetCommand extends CommandBase {
         level = 0;
         this.subsystem = subsystem;
         this.telemetry = telemetry;
+        this.telemetry.addData("Current Position: ", this.subsystem.getCurrentPosition());
+        this.telemetry.update();
         addRequirements(subsystem);
     }
 
     @Override
     public void execute() {
         subsystem.setTargetPosition(0);
-        subsystem.setMotorPosition(0);
+        subsystem.setMotorPosition(subsystem.getTargetPosition());
         subsystem.moveToPosition();
         telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
         telemetry.update();
@@ -28,7 +30,7 @@ public class ArmResetCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return subsystem.getCurrentPosition() == subsystem.getCurrentPosition() && subsystem.getState();
+        return subsystem.getState();
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ArmPIDSubsystem extends SubsystemBase {
     }
 
     public void moveToPosition(){
-        armMotor.set(0.3);
+        armMotor.set(0.1);
     }
 
     public int getCurrentPosition() {

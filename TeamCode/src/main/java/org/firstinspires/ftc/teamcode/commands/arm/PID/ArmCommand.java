@@ -15,13 +15,14 @@ public class ArmCommand extends CommandBase {
         level = 0;
         this.subsystem = subsystem;
         this.telemetry = telemetry;
+
         addRequirements(subsystem);
     }
 
     @Override
     public void execute() {
-        subsystem.setTargetPosition(-2500);
-        subsystem.setMotorPosition(-2500);
+        subsystem.setTargetPosition(1420);
+        subsystem.setMotorPosition(subsystem.getTargetPosition());
         subsystem.moveToPosition();
         telemetry.addData("Current Position: ", subsystem.getCurrentPosition());
         telemetry.update();
@@ -29,7 +30,7 @@ public class ArmCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return subsystem.getCurrentPosition() == subsystem.getTargetPosition();
+        return subsystem.getCurrentPosition() >= subsystem.getTargetPosition();
     }
 
     @Override
