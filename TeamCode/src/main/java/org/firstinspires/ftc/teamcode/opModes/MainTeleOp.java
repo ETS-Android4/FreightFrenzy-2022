@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.commands.arm.test.ArmExtendTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.ArmRetractTestCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.groups.ArmBoxExtendCommand;
 import org.firstinspires.ftc.teamcode.commands.arm.test.groups.ArmBoxRetractCommand;
+import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunBackCommand;
 import org.firstinspires.ftc.teamcode.commands.carousel.CarouselRunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.MecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeCommand;
@@ -54,6 +55,7 @@ public class MainTeleOp extends CommandOpMode {
     private OuttakeCommand outtakeCommand;
     private MecanumDriveCommand mecanumDriveCommand;
     private CarouselRunCommand carouselCommand;
+    private CarouselRunBackCommand carouselRunBackCommand;
     private ArmBoxRetractCommand armRetractCommand;
     private ArmBoxExtendCommand armExtendCommand;
     private ArmBoxCommand armBoxCommand;
@@ -90,6 +92,7 @@ public class MainTeleOp extends CommandOpMode {
         this.armBoxCommand = new ArmBoxCommand(new ArmCommand(this.armPIDSubsystem, telemetry),
                 new ArmResetCommand(this.armPIDSubsystem, telemetry), this.boxSubsystem);
         this.armResetCommand = new ArmResetBoxCommand(new ArmResetCommand(this.armPIDSubsystem, telemetry), this.boxSubsystem);
+        this.carouselRunBackCommand = new CarouselRunBackCommand(this.carouselSubsystem);
 //        this.armRetractCommand = new ArmBoxRetractCommand(new ArmRetractTestCommand(this.armSubsystem), this.boxSubsystem);
 //        this.armExtendCommand = new ArmBoxExtendCommand(new ArmExtendTestCommand(this.armSubsystem), this.boxSubsystem);
 
@@ -108,7 +111,7 @@ public class MainTeleOp extends CommandOpMode {
         operator.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armResetCommand);
 
         operator.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(this.carouselCommand);
-
+        operator.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(this.carouselRunBackCommand);
         register(this.mecanumDriveSubsystem);
         this.mecanumDriveSubsystem.setDefaultCommand(this.mecanumDriveCommand);
     }

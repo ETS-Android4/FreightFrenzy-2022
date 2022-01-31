@@ -11,7 +11,11 @@ public class CarouselSubsystem extends SubsystemBase {
     }
 
     public void runCarousel() {
-    motor.set(0.3);
+    motor.set(0.6);
+    }
+
+    public void runBackCarousel() {
+        motor.set(-0.6);
     }
 
     public void endCarousel() {
